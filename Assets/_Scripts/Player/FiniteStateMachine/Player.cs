@@ -1,0 +1,76 @@
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    #region States
+
+    public PlayerStateMachine StateMachine { get; private set; }
+    public P_GroundedState GroundedState { get; private set; }
+    public P_MoveState MoveState { get; private set; }
+    public P_IdleState IdleState { get; private set; }
+    #endregion
+
+    #region Components
+    public Core Core { get; private set; }
+    public Animator Anim { get; private set; }
+    public BoxCollider2D Coll { get; private set; }
+    public Rigidbody2D Rb { get; private set; }
+    
+    [SerializeField] private PlayerData playerData;
+    #endregion
+
+    #region Other
+
+    private Vector2 _workspace;
+
+    #endregion
+    
+    #region Unity Functions
+    
+    private void Awake()
+    {
+        Core = GetComponentInChildren<Core>();
+        
+        StateMachine = new PlayerStateMachine();
+        IdleState = new P_IdleState(this, StateMachine, playerData, "Idle");
+        MoveState = new P_MoveState(this, StateMachine, playerData, "Move");
+        GroundedState = new P_GroundedState(this, StateMachine, playerData, "Grounded");
+    }
+
+    private void Start()
+    {
+        Anim = GetComponent<Animator>();
+        Coll = GetComponent<BoxCollider2D>();
+        Rb = GetComponent<Rigidbody2D>();
+        
+        StateMachine.Initialize(IdleState);
+    }
+
+    private void Update()
+    {
+        Core.LogicUpdate();
+        StateMachine.CurrentState.LogicUpdate();
+    }
+
+    private void FixedUpdate()
+    {
+        // StateMachine.CurrentState.PhysicsUpdate();
+    }
+
+    #endregion
+
+    #region Other Funtions
+
+    private void AninmationTrigger()
+    {
+        StateMachine.CurrentState.AnimationTrigger();
+    }
+
+    private void AnimationFinishedTrigger()
+    {
+        StateMachine.CurrentState.AnimationFinishedTrigger();
+    }
+
+    #endregion
+    
+}

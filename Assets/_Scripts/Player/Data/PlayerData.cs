@@ -7,6 +7,6 @@ public class PlayerData : ScriptableObject
 {
     [Header("Player Data")]
     public float health;
-    public float moveSpeed;
-    public float jumpForce;
+    public float moveSpeed = 5f;
+    public float jumpForce = 10f;
 }
