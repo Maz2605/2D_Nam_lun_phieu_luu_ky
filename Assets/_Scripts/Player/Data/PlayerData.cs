@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [Header("Player Data")]
-    private float health;
-    private float moveSpeed;
-    private float jumpForce;
+    public float health;
+    public float moveSpeed;
+    public float jumpForce;
 }

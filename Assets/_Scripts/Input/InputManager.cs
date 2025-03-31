@@ -30,6 +30,7 @@ public class InputManager : Singleton<InputManager>
         
         NormInputX = Mathf.RoundToInt(RawInputMovement.x);
         NormInputY = Mathf.RoundToInt(RawInputMovement.y);
+        Debug.Log("Move");
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)
@@ -45,6 +46,7 @@ public class InputManager : Singleton<InputManager>
         {
             JumpInputStop = true;
         }
+        Debug.Log("Jump");
     }
     public void SetJumpInputFalse() => JumpInput = false;
     private void CheckJumpInputHoldTime()

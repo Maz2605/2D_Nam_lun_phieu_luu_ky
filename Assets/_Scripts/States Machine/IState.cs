@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IState
+public abstract class IState
 {
-    public void Enter();
-    public void Execute();
-    public void Exit();
-    public void DoCheck();
-    public void AnimationTrigger();
-    public void AnimationFinishedTrigger();
+    public abstract void Enter();
+    public abstract void LogicUpdate();
+    public abstract void PhysicsUpdate();
+    public abstract void Exit();
+    public abstract void DoChecks();
+    public abstract void AnimationTrigger();
+    public abstract void AnimationFinishedTrigger();
 }
+
