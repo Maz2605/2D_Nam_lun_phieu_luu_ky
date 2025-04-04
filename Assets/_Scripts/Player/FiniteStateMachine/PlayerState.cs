@@ -15,6 +15,24 @@ public class PlayerState
     protected bool IsAnimationFinished;
     protected bool IsExitingState;
 
+    //Get Component
+    private Collision _collision;
+
+    protected Collision Collision
+    {
+        get => _collision ? _collision : Core.GetCoreComponent<Collision>();
+    }
+    
+    private Movement _movement;
+
+    protected Movement Movement
+    {
+        get => _movement ? _movement : Core.GetCoreComponent<Movement>();
+    }
+    
+    //Check 
+    protected bool IsGrounded;
+    
     private string _animName;
 
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animName)
@@ -28,14 +46,18 @@ public class PlayerState
 
     public virtual void DoCheck()
     {
-        
+        if (Collision)
+        {
+            IsGrounded = Collision.Ground;
+        }
     }
     public virtual void Enter()
     {
         DoCheck();
+        Player.Anim.SetBool(_animName, true);
         //Anim
         StartTime = Time.time;
-        //Debug.Log(_animName);
+        Debug.Log(_animName);
         IsAnimationFinished = false;
         IsExitingState = false;
     }
@@ -57,7 +79,7 @@ public class PlayerState
 
     public virtual void Exit()
     {
-        //Anim
+        Player.Anim.SetBool(_animName, false);
         IsExitingState = true;
     }
 

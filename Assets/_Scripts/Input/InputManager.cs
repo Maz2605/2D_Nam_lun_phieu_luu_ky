@@ -17,7 +17,7 @@ public class InputManager : Singleton<InputManager>
     [SerializeField]    
     private float inputHolderTime = 0.2f;
 
-    private float jumpInputStartTime;
+    private float _jumpInputStartTime;
 
     private void Update()
     {
@@ -30,7 +30,6 @@ public class InputManager : Singleton<InputManager>
         
         NormInputX = Mathf.RoundToInt(RawInputMovement.x);
         NormInputY = Mathf.RoundToInt(RawInputMovement.y);
-        Debug.Log("Move");
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)
@@ -39,21 +38,20 @@ public class InputManager : Singleton<InputManager>
         {
             JumpInput = true;
             JumpInputStop = false;
-            jumpInputStartTime = Time.time;
+            _jumpInputStartTime = Time.time;
         }
 
         if (context.canceled)
         {
             JumpInputStop = true;
         }
-        Debug.Log("Jump");
     }
     public void SetJumpInputFalse() => JumpInput = false;
     private void CheckJumpInputHoldTime()
     {
-        if (Time.time >= jumpInputStartTime + inputHolderTime)
+        if (Time.time >= _jumpInputStartTime + inputHolderTime)
         {
-            JumpInput = false;
+            SetJumpInputFalse();
         }
     }
     

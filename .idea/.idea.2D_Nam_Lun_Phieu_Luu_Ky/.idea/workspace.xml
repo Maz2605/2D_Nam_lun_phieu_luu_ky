@@ -6,13 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="1f2c5410-5fe1-4605-8ffd-dfd5a39fd628" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2D_Nam_Lun_Phieu_Luu_Ky/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2D_Nam_Lun_Phieu_Luu_Ky/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Core/Core.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Core/Core.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Core/CoreComponents/CoreComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Core/CoreComponents/CoreComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/States Machine.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/States Machine/IState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/States Machine/IState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/States Machine/StateMachine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/States Machine/StateMachine.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scences/Develop.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scences/Develop.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Player_Temp/Base/Jumping (32 x 32).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Player_Temp/Base/Jumping (32 x 32).png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Core/CoreComponents/Attack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Core/CoreComponents/Attack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Core/CoreComponents/Collision.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Core/CoreComponents/Collision.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Input/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Input/InputManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/Data/PlayerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/Data/PlayerData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/PlayerState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/PlayerState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/States/AbilityStates/P_AbilityState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/States/AbilityStates/P_AbilityState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/States/AbilityStates/SubState/P_JumpState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/States/AbilityStates/SubState/P_JumpState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/States/GroundedStates/P_GroundedState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/States/GroundedStates/P_GroundedState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/States/GroundedStates/SubState/P_MoveState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/States/GroundedStates/SubState/P_MoveState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/States/InAirStates/P_InAirState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/States/InAirStates/P_InAirState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +36,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/PlayerStateMachine.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@2.6.0/Editor/ViewSwitcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.11.2/InputSystem/Editor/UITKAssetEditor/InputActionsEditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.11.0/Editor/UnityPurchasingEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -113,7 +121,14 @@
       <workItem from="1743234080028" duration="682000" />
       <workItem from="1743317106396" duration="4906000" />
       <workItem from="1743405019090" duration="1898000" />
-      <workItem from="1743452079380" duration="7686000" />
+      <workItem from="1743452079380" duration="11650000" />
+      <workItem from="1743472911039" duration="2582000" />
+      <workItem from="1743517113693" duration="6981000" />
+      <workItem from="1743590408996" duration="13708000" />
+      <workItem from="1743659562468" duration="1768000" />
+      <workItem from="1743664067910" duration="198000" />
+      <workItem from="1743732077161" duration="12000" />
+      <workItem from="1743732298486" duration="4441000" />
     </task>
     <servers />
   </component>

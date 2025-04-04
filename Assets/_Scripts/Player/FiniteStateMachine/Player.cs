@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     public P_GroundedState GroundedState { get; private set; }
     public P_MoveState MoveState { get; private set; }
     public P_IdleState IdleState { get; private set; }
+    public P_AbilityStates AbilityState { get; private set; }
+    public P_JumpState JumpState { get; private set; }
+    public P_InAirState InAirState { get; private set; }
     #endregion
 
     #region Components
@@ -35,6 +38,9 @@ public class Player : MonoBehaviour
         IdleState = new P_IdleState(this, StateMachine, playerData, "Idle");
         MoveState = new P_MoveState(this, StateMachine, playerData, "Move");
         GroundedState = new P_GroundedState(this, StateMachine, playerData, "Grounded");
+        InAirState = new P_InAirState(this, StateMachine, playerData, "InAir");
+        AbilityState = new P_AbilityStates(this, StateMachine, playerData, "Ability");
+        JumpState = new P_JumpState(this, StateMachine, playerData, "InAir");
     }
 
     private void Start()
@@ -54,7 +60,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // StateMachine.CurrentState.PhysicsUpdate();
+        StateMachine.CurrentState.PhysicsUpdate();
     }
 
     #endregion

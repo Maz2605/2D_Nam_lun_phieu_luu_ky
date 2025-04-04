@@ -23,6 +23,6 @@ public class Collision : CoreComponent
    
    public bool Ground
    {
-      get => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, groundLayer);
+      get => Physics2D.OverlapCircle(GroundCheck.position, GroundCheckRadius, groundLayer);
    }
 }

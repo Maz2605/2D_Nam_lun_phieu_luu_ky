@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_JumpState : MonoBehaviour
+public class P_JumpState : P_AbilityStates
 {
-    // Start is called before the first frame update
-    void Start()
+    private int _amountOfJumpLeft;
+    public P_JumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animName) : base(player, stateMachine, playerData, animName)
     {
-        
+        _amountOfJumpLeft = playerData.amountOfJumps;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
-        
+        base.Enter();
+        Debug.Log("Enter Jump State");
+        InputManager.Instance.SetJumpInputFalse();
+        Movement?.SetVelocityY(PlayerData.jumpVelocity);
+        IsAbilityDone = true;
+        _amountOfJumpLeft--;
+        Player.InAirState.SetIsJumpingTrue();
     }
+
+    public bool CanJump() => _amountOfJumpLeft > 0;
+    
+    public void ResetJump() => _amountOfJumpLeft = PlayerData.amountOfJumps;
+    
+    public void DecreaseAmountOfJumpsLeft() => _amountOfJumpLeft--;
+
+    
 }

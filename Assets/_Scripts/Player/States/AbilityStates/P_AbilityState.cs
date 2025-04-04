@@ -2,17 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_AbilityStates : MonoBehaviour
+public class P_AbilityStates : PlayerState
 {
-    // Start is called before the first frame update
-    void Start()
+    protected bool IsAbilityDone;
+    
+    public P_AbilityStates(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animName) : base(player, stateMachine, playerData, animName)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
+        base.Enter();
+        Debug.Log("Enter Ability State");
+        IsAbilityDone = false;
+    }
+
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
         
+        if (IsAbilityDone)
+        {
+            if (IsGrounded && Movement?.CurVelocity.y <= 0.01f)
+            {
+                StateMachine.ChangeState(Player.IdleState);
+            }
+            else
+            {
+                StateMachine.ChangeState(Player.InAirState);
+            }
+        }
     }
 }

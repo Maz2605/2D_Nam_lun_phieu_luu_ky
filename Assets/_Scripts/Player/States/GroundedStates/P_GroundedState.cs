@@ -4,42 +4,33 @@ using UnityEngine;
 
 public class P_GroundedState : PlayerState
 {
-    private bool _isGrounded;
     
-    private Collision _collision;
-
-    protected Collision Collision
+    public P_GroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animName) :
+        base(player, stateMachine, playerData, animName)
     {
-        get => _collision ? _collision : Core.GetCoreComponent(ref _collision);
     }
     
-    private Movement _movement;
-
-    protected Movement Movement
-    {
-        get => _movement ? _movement : Core.GetCoreComponent(ref _movement);
-    }
-
-    public P_GroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animName) : base(player, stateMachine, playerData, animName)
-    {
-        
-    }
-
-    public override void DoCheck()
-    {
-        base.DoCheck();
-        
-    }
 
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Enter Ground State");
+        Player.JumpState.ResetJump();
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        
+
+        if (InputManager.Instance.JumpInput && Player.JumpState.CanJump())
+        {
+            StateMachine.ChangeState(Player.JumpState);
+        }
+        else if (!IsGrounded)
+        {
+            Player.InAirState.StartCoyoteTime();
+            StateMachine.ChangeState(Player.InAirState);
+        }
         
         if (!IsExitingState)
         {
@@ -53,4 +44,5 @@ public class P_GroundedState : PlayerState
             }
         }
     }
+    
 }

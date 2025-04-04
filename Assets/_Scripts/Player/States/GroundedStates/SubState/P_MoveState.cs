@@ -27,4 +27,10 @@ public class P_MoveState : P_GroundedState
             StateMachine.ChangeState(Player.IdleState);
         }
     }
+
+    public override void Exit()
+    {
+        base.Exit();
+        Player.Anim.SetBool("Move", false);
+    }
 }
