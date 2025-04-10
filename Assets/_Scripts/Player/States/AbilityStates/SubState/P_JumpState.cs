@@ -13,7 +13,6 @@ public class P_JumpState : P_AbilityStates
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Enter Jump State");
         InputManager.Instance.SetJumpInputFalse();
         Movement?.SetVelocityY(PlayerData.jumpVelocity);
         IsAbilityDone = true;

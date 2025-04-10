@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
     public BoxCollider2D Coll { get; private set; }
     public Rigidbody2D Rb { get; private set; }
     
-    [SerializeField] private PlayerData playerData;
+    [SerializeField] public PlayerData playerData;
     #endregion
 
     #region Other
@@ -48,7 +49,7 @@ public class Player : MonoBehaviour
         Anim = GetComponent<Animator>();
         Coll = GetComponent<BoxCollider2D>();
         Rb = GetComponent<Rigidbody2D>();
-        
+        playerData.facingDirection = 1;
         StateMachine.Initialize(IdleState);
     }
 
@@ -75,6 +76,12 @@ public class Player : MonoBehaviour
     private void AnimationFinishedTrigger()
     {
         StateMachine.CurrentState.AnimationFinishedTrigger();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        var Item = other.gameObject.GetComponent<Base_Item>();
+        Item.Effect(this);
     }
 
     #endregion

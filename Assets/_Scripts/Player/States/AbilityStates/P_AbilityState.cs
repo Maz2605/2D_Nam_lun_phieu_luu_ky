@@ -13,7 +13,6 @@ public class P_AbilityStates : PlayerState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Enter Ability State");
         IsAbilityDone = false;
     }
 

@@ -14,7 +14,6 @@ public class P_GroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Enter Ground State");
         Player.JumpState.ResetJump();
     }
 

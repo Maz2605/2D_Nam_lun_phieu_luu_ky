@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "PlayerData/Data")]
 public class PlayerData : ScriptableObject
 {
+    public int facingDirection = 1;
     [Header("Move State")]
     public float moveSpeed = 5f;
     

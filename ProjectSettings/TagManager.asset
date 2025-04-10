@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -46,12 +47,18 @@ TagManager:
   - name: Background
     uniqueID: 3228964619
     locked: 0
+  - name: Map
+    uniqueID: 1917645161
+    locked: 0
   - name: Decoration
     uniqueID: 3251837405
     locked: 0
   - name: Player
     uniqueID: 3857735147
     locked: 0
-  - name: Map
-    uniqueID: 1917645161
+  - name: Enemy
+    uniqueID: 26939491
+    locked: 0
+  - name: Item
+    uniqueID: 2909320167
     locked: 0

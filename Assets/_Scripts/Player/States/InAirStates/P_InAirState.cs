@@ -13,12 +13,7 @@ public class P_InAirState : PlayerState
     {
     }
 
-    public override void Enter()
-    {
-        base.Enter();
-        Debug.Log("Enter In Air State");
-    }
-
+  
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -37,7 +32,7 @@ public class P_InAirState : PlayerState
         else
         {
             Movement?.CheckIfShouldFlip(InputManager.Instance.NormInputX);
-            Movement?.SetVelocityX(PlayerData.moveSpeed * InputManager.Instance.NormInputX);
+            Movement?.SetVelocityX(PlayerData.moveSpeed * InputManager.Instance.NormInputX * PlayerData.facingDirection);
         }
     }
 

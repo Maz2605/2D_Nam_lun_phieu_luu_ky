@@ -12,7 +12,6 @@ public class P_IdleState : P_GroundedState
     {
         base.Enter();
         Movement?.SetVelocityX(0f);
-        Debug.Log("IdleState Enter");
     }
 
     public override void LogicUpdate()
