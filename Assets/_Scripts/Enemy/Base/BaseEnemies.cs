@@ -30,7 +30,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     protected virtual void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();
-        Anim = GetComponent<Animator>();
+        Anim = GetComponent<Animator>(); 
         CurrentHealth = baseEnemiesData.health;
     }
 

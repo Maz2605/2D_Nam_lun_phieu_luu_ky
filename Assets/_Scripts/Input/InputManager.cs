@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : Singleton<InputManager>
+public class InputManager : MonoBehaviour
 {
     public Vector2 RawInputMovement {get; private set;}
     public int NormInputX {get; private set;}

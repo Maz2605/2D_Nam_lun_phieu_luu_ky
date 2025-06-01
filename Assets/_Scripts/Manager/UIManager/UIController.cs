@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIController : Singleton<UIController>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public UISetting UISetting => FindObjectOfType<UISetting>();
+    // public UILose UILose => FindObjectOfType<UILose>();
+    // public UIGamePlay UIGamePlay => FindObjectOfType<UIGamePlay>();
 
-    // Update is called once per frame
-    void Update()
+    protected override void Awake()
     {
-        
+        base.KeepAlive(false);
+        base.Awake();
     }
 }
