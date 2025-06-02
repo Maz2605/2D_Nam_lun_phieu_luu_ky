@@ -9,6 +9,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
 {
     private Rigidbody2D Rb { get; set; }
     private Animator Anim { get; set; }
+    private Collider2D Coll { get; set; }
     [SerializeField] private Material blinkMaterial;
     private Material runtimeMaterial;
     private int blinkStrengthID;
@@ -36,6 +37,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     {
         Rb = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>(); 
+        Coll = GetComponent<Collider2D>();
         runtimeMaterial = new Material(blinkMaterial);
         GetComponent<SpriteRenderer>().material = runtimeMaterial;
         blinkStrengthID = Shader.PropertyToID("_BlinkStrength");
@@ -161,8 +163,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         if (CurrentState == State.Dead) return;
 
         CurrentState = State.Dead;
-        Rb.velocity = Vector2.zero;
-        Rb.bodyType = RigidbodyType2D.Static;
+        Coll.enabled = false;
         Destroy(gameObject, baseEnemiesData.destroyAfter);
     }
 

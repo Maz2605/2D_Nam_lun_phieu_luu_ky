@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4064071424203407300}
   - component: {fileID: 6219331585635031142}
   - component: {fileID: 2671254551213454117}
-  - component: {fileID: 3446912000288407047}
+  - component: {fileID: 2338919245372914330}
   m_Layer: 0
   m_Name: Mud
   m_TagString: Enemy
@@ -181,7 +181,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0407668, y: 0.63033724}
   m_EdgeRadius: 0
---- !u!114 &3446912000288407047
+--- !u!114 &2338919245372914330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

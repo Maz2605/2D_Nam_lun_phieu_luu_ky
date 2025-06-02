@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4488cca179e6ebd45b7857cd810e3ca3, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  maxHealth: 100
   facingDirection: 1
+  destroyAfterSeconds: 3
   moveSpeed: 5
   jumpVelocity: 10
   amountOfJumps: 2

@@ -9,6 +9,7 @@ public class PlayerData : ScriptableObject
     [Header("Base")]
     public int maxHealth = 100;
     public int facingDirection = 1;
+    public float destroyAfterSeconds = 1f;
     [Header("Move State")]
     public float moveSpeed = 5f;
     

@@ -99,6 +99,17 @@ public class Player : MonoBehaviour, IDamageable
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, playerData.maxHealth);
         Debug.Log("Player Health: " + CurrentHealth);
         StartCoroutine(DamageAnimation());
+        if(CurrentHealth == 0)
+            Dead();
+    }
+
+    public void Dead()
+    {
+        Debug.Log("Player Dead");
+        Coll.enabled = false;
+        InputManager.enabled = false;
+        Rb.velocity = Vector2.zero;
+        Destroy(gameObject, playerData.destroyAfterSeconds);
     }
 
     IEnumerator DamageAnimation()

@@ -9,7 +9,7 @@ public class Mud : BaseEnemies
         base.AttackEffect(other);
         Rigidbody2D playerRB = other.gameObject.GetComponent<Rigidbody2D>();
         var dg = other.gameObject.GetComponent<IDamageable>();
-        if (playerRB != null)
+        if (playerRB != null && other.gameObject.CompareTag("Player"))
         {
             dg.TakeDamage(baseEnemiesData.damage);
             Vector2 direction = (other.transform.position - transform.position).normalized;
