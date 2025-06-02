@@ -13,10 +13,10 @@ public class Mud : BaseEnemies
         {
             dg.TakeDamage(baseEnemiesData.damage);
             Vector2 direction = (other.transform.position - transform.position).normalized;
-            Vector2 knockback = new Vector2(direction.x, 0.5f).normalized * baseEnemiesData.knockbackForce;
+            Vector2 knockback = new Vector2(direction.x, 0.2f).normalized * baseEnemiesData.knockbackForce;
             playerRB.AddForce(knockback, ForceMode2D.Impulse);
         }
-        attackTimer = baseEnemiesData.attackCooldown;
+        AttackTimer = baseEnemiesData.attackCooldown;
         CurrentState = State.Patrol;
         Flip();
     }

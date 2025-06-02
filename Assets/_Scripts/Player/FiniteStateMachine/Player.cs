@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     #region States
 
@@ -20,7 +22,14 @@ public class Player : MonoBehaviour
     public BoxCollider2D Coll { get; private set; }
     public Rigidbody2D Rb { get; private set; }
     
+    public InputManager InputManager { get; private set; }
+    
     [SerializeField] public PlayerData playerData;
+    [SerializeField] private Material blinkMaterial;
+    private Material runtimeMaterial;
+    private int blinkStrengthID;
+    public int CurrentHealth { get; private set; }
+    public int facingDirection;
     #endregion
 
     #region Other
@@ -49,7 +58,12 @@ public class Player : MonoBehaviour
         Anim = GetComponent<Animator>();
         Coll = GetComponent<BoxCollider2D>();
         Rb = GetComponent<Rigidbody2D>();
-        playerData.facingDirection = 1;
+        runtimeMaterial = new Material(blinkMaterial);
+        GetComponent<SpriteRenderer>().material = runtimeMaterial;
+        blinkStrengthID = Shader.PropertyToID("_BlinkStrength");
+        InputManager = GetComponent<InputManager>();
+        facingDirection = playerData.facingDirection;
+        CurrentHealth = playerData.maxHealth;
         StateMachine.Initialize(IdleState);
     }
 
@@ -78,12 +92,30 @@ public class Player : MonoBehaviour
         StateMachine.CurrentState.AnimationFinishedTrigger();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    
+
+    public void TakeDamage(int damage)
     {
-        var Item = other.gameObject.GetComponent<Base_Item>();
-        Item.Effect(this);
+        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, playerData.maxHealth);
+        Debug.Log("Player Health: " + CurrentHealth);
+        StartCoroutine(DamageAnimation());
     }
 
+    IEnumerator DamageAnimation()
+    {
+        DOTween.To(
+                () => runtimeMaterial.GetFloat(blinkStrengthID),
+                x => runtimeMaterial.SetFloat(blinkStrengthID, x),
+                1f,
+                0.1f
+            )
+            .SetLoops(2, LoopType.Yoyo)
+            .OnComplete(() => runtimeMaterial.SetFloat(blinkStrengthID, 0f));
+
+        yield return new WaitForSeconds(0.25f);
+    }
     #endregion
+    
+    
     
 }

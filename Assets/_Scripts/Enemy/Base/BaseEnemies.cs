@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -8,13 +9,17 @@ public class BaseEnemies : MonoBehaviour, IDamageable
 {
     private Rigidbody2D Rb { get; set; }
     private Animator Anim { get; set; }
-    private int FaceDirection { get; set; }
+    [SerializeField] private Material blinkMaterial;
+    private Material runtimeMaterial;
+    private int blinkStrengthID;
+    public int FaceDirection { get; set; }
 
     public int CurrentHealth { get; set; }
 
-    protected Vector2 startPos;
-    private Transform target;
-    protected float attackTimer = 0f;
+    protected Vector2 StartPos;
+    protected Vector2 ChasStartPos;
+    private Transform _target;
+    protected float AttackTimer = 0f;
 
     [SerializeField] protected BaseEnemiesData baseEnemiesData;
 
@@ -31,12 +36,15 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     {
         Rb = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>(); 
+        runtimeMaterial = new Material(blinkMaterial);
+        GetComponent<SpriteRenderer>().material = runtimeMaterial;
+        blinkStrengthID = Shader.PropertyToID("_BlinkStrength");
         CurrentHealth = baseEnemiesData.health;
     }
 
     private void Start()
     {
-        startPos = transform.position;
+        StartPos = transform.position;
         FaceDirection = baseEnemiesData.facingDirection;
     }
 
@@ -68,8 +76,8 @@ public class BaseEnemies : MonoBehaviour, IDamageable
 
     protected void CheckIfShouldFlip()
     {
-        if (FaceDirection == -1 && transform.position.x <= startPos.x - baseEnemiesData.patrolRange ||
-            FaceDirection == 1 && transform.position.x >= startPos.x + baseEnemiesData.patrolRange)
+        if (FaceDirection == -1 && transform.position.x <= StartPos.x - baseEnemiesData.patrolRange ||
+            FaceDirection == 1 && transform.position.x >= StartPos.x + baseEnemiesData.patrolRange)
             Flip();
     }
 
@@ -81,24 +89,31 @@ public class BaseEnemies : MonoBehaviour, IDamageable
 
     public virtual void Attack()
     {
-        if (target == null)
+        if (_target == null)
         {
             CurrentState = State.Patrol;
             return;
         }
 
-        float dir = Mathf.Sign(target.position.x - transform.position.x);
+        float dir = Mathf.Sign(_target.position.x - transform.position.x);
         Rb.velocity = new Vector2(dir * baseEnemiesData.moveSpeed, Rb.velocity.y);
 
         if ((dir > 0 && FaceDirection == -1) || (dir < 0 && FaceDirection == 1))
         {
             Flip();                                     
         }
+        Vector2 wallCheckOrigin = transform.position + Vector3.right * FaceDirection * 0.5f;
+        RaycastHit2D wallHit = Physics2D.Raycast(wallCheckOrigin, Vector2.right * FaceDirection, 0.1f, baseEnemiesData.groundMask);
+        if (wallHit.collider != null)
+        {
+            CurrentState = State.Patrol;
+            _target = null;
+        }
     }
 
     void DetectPlayer()
     {
-        attackTimer -= Time.deltaTime;
+        AttackTimer -= Time.deltaTime;
         Vector2 origin = transform.position;
         Vector2 direction = FaceDirection == 1 ? Vector2.right : Vector2.left;
         RaycastHit2D hit =
@@ -106,13 +121,20 @@ public class BaseEnemies : MonoBehaviour, IDamageable
 
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
+            if (CurrentState != State.Chasing)
+            {
+                ChasStartPos = transform.position;
+            }
             CurrentState = State.Chasing;
-            target = hit.transform;
+            _target = hit.transform; 
         }
         else
         {
-            CurrentState = State.Patrol;
-            target = null;
+            if (CurrentState == State.Chasing)
+            {
+                CurrentState = State.Patrol;
+                _target = null;
+            }
         }
 
         Debug.DrawRay(origin, direction * baseEnemiesData.detectRange, Color.red);
@@ -122,7 +144,8 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     {
         if (CurrentState == State.Dead) return;
 
-        if (other.gameObject.CompareTag("Player") && attackTimer <= 0f)
+        var player = other.gameObject.CompareTag("Player");
+        if (AttackTimer <= 0f)
         {
             AttackEffect(other);
         }
@@ -146,8 +169,22 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, baseEnemiesData.health);
-        Debug.Log(CurrentHealth);
+        Debug.Log("Enemy" + CurrentHealth);
+        StartCoroutine(DamageAnimation());
         if (CurrentHealth == 0)
             Dead();
+    }
+    IEnumerator DamageAnimation()
+    {
+        DOTween.To(
+                () => runtimeMaterial.GetFloat(blinkStrengthID),
+                x => runtimeMaterial.SetFloat(blinkStrengthID, x),
+                1f,
+                0.1f
+            )
+            .SetLoops(2, LoopType.Yoyo)
+            .OnComplete(() => runtimeMaterial.SetFloat(blinkStrengthID, 0f));
+
+        yield return new WaitForSeconds(0.25f);
     }
 }

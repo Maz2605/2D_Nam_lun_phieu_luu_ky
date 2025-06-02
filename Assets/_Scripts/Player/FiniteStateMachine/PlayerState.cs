@@ -34,6 +34,8 @@ public class PlayerState
     protected bool IsGrounded;
     
     private string _animName;
+    
+    public int facingDirection;
 
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animName)
     {
@@ -42,6 +44,7 @@ public class PlayerState
         PlayerData = playerData;
         _animName = animName;
         Core = player.Core;
+        facingDirection = player.facingDirection;
     }
 
     public virtual void DoCheck()
@@ -57,16 +60,10 @@ public class PlayerState
         Player.Anim.SetBool(_animName, true);
         //Anim
         StartTime = Time.time;
-        Debug.Log(_animName);
         IsAnimationFinished = false;
         IsExitingState = false;
     }
-
-    public virtual void Execute()
-    {
-        
-    }
-
+    
     public virtual void LogicUpdate()
     {
         

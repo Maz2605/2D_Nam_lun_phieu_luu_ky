@@ -6,6 +6,8 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "PlayerData/Data")]
 public class PlayerData : ScriptableObject
 {
+    [Header("Base")]
+    public int maxHealth = 100;
     public int facingDirection = 1;
     [Header("Move State")]
     public float moveSpeed = 5f;
@@ -17,4 +19,7 @@ public class PlayerData : ScriptableObject
     [Header("In Air State")]
     public float coyoteTime = 0.2f;
     public float jumpHeightMultiplier = 0.2f;
+    
+    
+    
 }

@@ -13,6 +13,7 @@ public class BaseEnemiesData : ScriptableObject
     
     [Header("Attack")]
     public float detectRange = 2.5f;
+    private float chaseDistance = 5f;
     public int knockbackForce = 20;
     public float attackCooldown = 1f;
     public int damage = 20;
@@ -21,4 +22,5 @@ public class BaseEnemiesData : ScriptableObject
     [Header("Movement")]
     public int moveSpeed = 2;
     public int patrolRange = 2;
+    public LayerMask groundMask;
 }

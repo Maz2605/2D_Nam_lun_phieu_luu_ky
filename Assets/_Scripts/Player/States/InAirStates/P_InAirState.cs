@@ -25,14 +25,14 @@ public class P_InAirState : PlayerState
         {
             StateMachine.ChangeState(Player.GroundedState);
         }
-        else if (InputManager.Instance.JumpInput && Player.JumpState.CanJump())
+        else if (Player.InputManager.JumpInput && Player.JumpState.CanJump())
         {
             StateMachine.ChangeState(Player.JumpState);
         }
         else
         {
-            Movement?.CheckIfShouldFlip(InputManager.Instance.NormInputX);
-            Movement?.SetVelocityX(PlayerData.moveSpeed * InputManager.Instance.NormInputX * PlayerData.facingDirection);
+            Movement?.CheckIfShouldFlip(Player.InputManager.NormInputX);
+            Movement?.SetVelocityX(PlayerData.moveSpeed * Player.InputManager.NormInputX * PlayerData.facingDirection);
         }
     }
 
@@ -55,7 +55,7 @@ public class P_InAirState : PlayerState
     {
         if (_isJumping)
         {
-            if (InputManager.Instance.JumpInputStop)
+            if (Player.InputManager.JumpInputStop)
             {
                 Movement?.SetVelocityY(Movement.CurVelocity.y * PlayerData.jumpHeightMultiplier);
                 _isJumping = false;
