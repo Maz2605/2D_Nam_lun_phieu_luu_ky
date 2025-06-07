@@ -29,7 +29,6 @@ public class Player : MonoBehaviour, IDamageable
     private Material runtimeMaterial;
     private int blinkStrengthID;
     public int CurrentHealth { get; private set; }
-    public int facingDirection;
     #endregion
 
     #region Other
@@ -62,8 +61,8 @@ public class Player : MonoBehaviour, IDamageable
         GetComponent<SpriteRenderer>().material = runtimeMaterial;
         blinkStrengthID = Shader.PropertyToID("_BlinkStrength");
         InputManager = GetComponent<InputManager>();
-        facingDirection = playerData.facingDirection;
         CurrentHealth = playerData.maxHealth;
+        playerData.facingDirection = 1;
         StateMachine.Initialize(IdleState);
     }
 
@@ -71,11 +70,14 @@ public class Player : MonoBehaviour, IDamageable
     {
         Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
+        
     }
 
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
+        Anim.SetFloat("xVelocity", Rb.velocity.x);
+        Anim.SetFloat("yVelocity", Rb.velocity.y);
     }
 
     #endregion
@@ -99,6 +101,7 @@ public class Player : MonoBehaviour, IDamageable
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, playerData.maxHealth);
         Debug.Log("Player Health: " + CurrentHealth);
         StartCoroutine(DamageAnimation());
+        Anim.SetTrigger("Hit");
         if(CurrentHealth == 0)
             Dead();
     }

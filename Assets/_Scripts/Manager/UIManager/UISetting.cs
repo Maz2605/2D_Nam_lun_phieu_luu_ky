@@ -66,7 +66,7 @@ public class UISetting : MonoBehaviour
         }
         public void DisplaySetting(bool enable, Action onClosed = null)
         {
-            if(GameManager.Instance.CurrentGameState == GameState.ShowTutorial)return;
+            // if(GameManager.Instance.CurrentGameState == GameState.ShowTutorial)return;
             if (enable)
             {
                 dime.gameObject.SetActive(true);

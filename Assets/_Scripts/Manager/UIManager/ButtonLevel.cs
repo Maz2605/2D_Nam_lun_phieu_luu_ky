@@ -57,7 +57,7 @@ public class ButtonLevel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private void StartLevel()
     {
         if(!IsLock) return;
-        GameManager.Instance.PlayGame(level);
+        // GameManager.Instance.;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

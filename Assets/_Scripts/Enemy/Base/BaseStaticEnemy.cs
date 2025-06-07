@@ -62,8 +62,9 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
     }
 
 
-    public void Patrol()
+    public virtual void Patrol()
     {
+        
     }
 
     public void Attack()

@@ -1,28 +1,27 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BaseEnemies : MonoBehaviour, IDamageable
 {
-    private Rigidbody2D Rb { get; set; }
-    private Animator Anim { get; set; }
+    
+    public Rigidbody2D Rb { get; set; }
+    public Animator Anim { get; set; }
     private Collider2D Coll { get; set; }
     [SerializeField] private Material blinkMaterial;
-    private Material runtimeMaterial;
-    private int blinkStrengthID;
+    private Material _runtimeMaterial;
+    private int _blinkStrengthID;
     public int FaceDirection { get; set; }
 
     public int CurrentHealth { get; set; }
 
     protected Vector2 StartPos;
     protected Vector2 ChasStartPos;
-    private Transform _target;
+    protected Transform Target;
     protected float AttackTimer = 0f;
 
     [SerializeField] protected BaseEnemiesData baseEnemiesData;
+    protected float MoveSpeed;
 
     public enum State
     {
@@ -38,9 +37,9 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         Rb = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>(); 
         Coll = GetComponent<Collider2D>();
-        runtimeMaterial = new Material(blinkMaterial);
-        GetComponent<SpriteRenderer>().material = runtimeMaterial;
-        blinkStrengthID = Shader.PropertyToID("_BlinkStrength");
+        _runtimeMaterial = new Material(blinkMaterial);
+        GetComponent<SpriteRenderer>().material = _runtimeMaterial;
+        _blinkStrengthID = Shader.PropertyToID("_BlinkStrength");
         CurrentHealth = baseEnemiesData.health;
     }
 
@@ -48,6 +47,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     {
         StartPos = transform.position;
         FaceDirection = baseEnemiesData.facingDirection;
+        MoveSpeed = baseEnemiesData.moveSpeed;
     }
 
     private void Update()
@@ -62,9 +62,11 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         switch (CurrentState)
         {
             case State.Patrol:
+                Anim.SetBool("Attack", false);
                 Patrol();
                 break;
             case State.Chasing:
+                Anim.SetBool("Attack", true);
                 Attack();
                 break;
         }
@@ -91,14 +93,14 @@ public class BaseEnemies : MonoBehaviour, IDamageable
 
     public virtual void Attack()
     {
-        if (_target == null)
+        if (Target == null)
         {
             CurrentState = State.Patrol;
             return;
         }
 
-        float dir = Mathf.Sign(_target.position.x - transform.position.x);
-        Rb.velocity = new Vector2(dir * baseEnemiesData.moveSpeed, Rb.velocity.y);
+        float dir = Mathf.Sign(Target.position.x - transform.position.x);
+        Rb.velocity = new Vector2(dir * MoveSpeed, Rb.velocity.y);
 
         if ((dir > 0 && FaceDirection == -1) || (dir < 0 && FaceDirection == 1))
         {
@@ -109,7 +111,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         if (wallHit.collider != null)
         {
             CurrentState = State.Patrol;
-            _target = null;
+            Target = null;
         }
     }
 
@@ -128,14 +130,14 @@ public class BaseEnemies : MonoBehaviour, IDamageable
                 ChasStartPos = transform.position;
             }
             CurrentState = State.Chasing;
-            _target = hit.transform; 
+            Target = hit.transform; 
         }
-        else
+        else if(hit.collider == null)
         {
             if (CurrentState == State.Chasing)
             {
                 CurrentState = State.Patrol;
-                _target = null;
+                Target = null;
             }
         }
 
@@ -145,9 +147,8 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (CurrentState == State.Dead) return;
-
-        var player = other.gameObject.CompareTag("Player");
-        if (AttackTimer <= 0f)
+        
+        if ( other.gameObject.CompareTag("Player")&& AttackTimer <= 0f)
         {
             AttackEffect(other);
         }
@@ -178,13 +179,13 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     IEnumerator DamageAnimation()
     {
         DOTween.To(
-                () => runtimeMaterial.GetFloat(blinkStrengthID),
-                x => runtimeMaterial.SetFloat(blinkStrengthID, x),
+                () => _runtimeMaterial.GetFloat(_blinkStrengthID),
+                x => _runtimeMaterial.SetFloat(_blinkStrengthID, x),
                 1f,
                 0.1f
             )
             .SetLoops(2, LoopType.Yoyo)
-            .OnComplete(() => runtimeMaterial.SetFloat(blinkStrengthID, 0f));
+            .OnComplete(() => _runtimeMaterial.SetFloat(_blinkStrengthID, 0f));
 
         yield return new WaitForSeconds(0.25f);
     }

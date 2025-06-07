@@ -35,8 +35,6 @@ public class PlayerState
     
     private string _animName;
     
-    public int facingDirection;
-
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animName)
     {
         Player = player;
@@ -44,7 +42,6 @@ public class PlayerState
         PlayerData = playerData;
         _animName = animName;
         Core = player.Core;
-        facingDirection = player.facingDirection;
     }
 
     public virtual void DoCheck()

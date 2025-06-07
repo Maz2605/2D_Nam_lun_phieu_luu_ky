@@ -4,15 +4,20 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Unity.Loading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AnimationTranslate : Singleton<AnimationTranslate>
 {
-    [SerializeField] private GameObject animation;
-    [SerializeField] private SpriteMask spriteMask;
-    [SerializeField] private SpriteRenderer mushroom;
+    [Header("Popup Prefab")]
+    public GameObject popupPrefab;  // Prefab chứa Image
+
+    [Header("Animation Settings")]
+    public float zoomInDuration = 0.5f;
+    public float holdDuration = 0.5f;
+    public float zoomOutDuration = 0.5f;
+    public Ease zoomEase = Ease.OutQuad;
     
-    [SerializeField] private float duration;
-    [SerializeField] private float speed;
+    public float duration = 2f;
     private Action extraEvent;
 
     public Action ExtraEvent
@@ -24,47 +29,9 @@ public class AnimationTranslate : Singleton<AnimationTranslate>
 
     public void DisplayAnim(bool enable, Action onClosed = null)
     {
-        if (enable)
-        {
-            mushroom.transform.localScale = Vector3.zero;
-            spriteMask.transform.localScale = Vector3.zero;
-            
-            IsActive = true;
-            animation.SetActive(true);
-            var sequence = DOTween.Sequence();
-            
-            sequence.Append(mushroom.transform.DOScale(Vector3.one * speed, duration).SetEase(Ease.OutQuart));
-        }
-        else
-        {
-            spriteMask.transform.localScale = Vector3.zero;
-            mushroom.transform.localScale = Vector3.one * speed;
-
-            spriteMask.transform.DOScale(Vector3.one * speed, duration).SetEase(Ease.InQuart).OnComplete(() =>
-            {
-                onClosed?.Invoke();
-
-                IsActive = false;
-                animation.SetActive(false);
-            });
-        }
+        
     }
-    public void Loading(Action onLoading = null, Action onClosed = null)
-    {
-        DisplayAnim(true);
-
-        DOVirtual.DelayedCall(duration, () => { onLoading?.Invoke(); });
-
-        DOVirtual.DelayedCall(3 * duration, () =>
-        {
-            DisplayAnim(false, () =>
-            {
-                onClosed?.Invoke();
-                extraEvent?.Invoke();
-                extraEvent = null;
-            });
-        });
-    }
+    
     public void StartAnim(Action onClosed = null)
     {
         DisplayAnim(true);
@@ -74,13 +41,5 @@ public class AnimationTranslate : Singleton<AnimationTranslate>
         });
     }
 
-    public void StopAnim(Action onClosed = null)
-    {
-        DOVirtual.DelayedCall(duration, () =>
-        {
-            onClosed?.Invoke();
-            extraEvent?.Invoke();
-            extraEvent = null;
-        });
-    }
+    
 }
