@@ -44,8 +44,8 @@ public class Player : MonoBehaviour, IDamageable
         Core = GetComponentInChildren<Core>();
         
         StateMachine = new PlayerStateMachine();
-        IdleState = new P_IdleState(this, StateMachine, playerData, "Idle");
-        MoveState = new P_MoveState(this, StateMachine, playerData, "Move");
+        IdleState = new P_IdleState(this, StateMachine, playerData, "Grounded");
+        MoveState = new P_MoveState(this, StateMachine, playerData, "Grounded");
         GroundedState = new P_GroundedState(this, StateMachine, playerData, "Grounded");
         InAirState = new P_InAirState(this, StateMachine, playerData, "InAir");
         AbilityState = new P_AbilityStates(this, StateMachine, playerData, "Ability");
@@ -64,6 +64,18 @@ public class Player : MonoBehaviour, IDamageable
         CurrentHealth = playerData.maxHealth;
         playerData.facingDirection = 1;
         StateMachine.Initialize(IdleState);
+        InputManager.EnableInput();
+    }
+
+    private void OnEnable()
+    {
+        
+        DOTween.Play(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        DOTween.Pause(gameObject);  
     }
 
     private void Update()
@@ -76,26 +88,14 @@ public class Player : MonoBehaviour, IDamageable
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
-        Anim.SetFloat("xVelocity", Rb.velocity.x);
+        Anim.SetFloat("xVelocity", Mathf.Abs(Rb.velocity.x));
         Anim.SetFloat("yVelocity", Rb.velocity.y);
     }
 
     #endregion
 
     #region Other Funtions
-
-    private void AninmationTrigger()
-    {
-        StateMachine.CurrentState.AnimationTrigger();
-    }
-
-    private void AnimationFinishedTrigger()
-    {
-        StateMachine.CurrentState.AnimationFinishedTrigger();
-    }
-
     
-
     public void TakeDamage(int damage)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, playerData.maxHealth);
@@ -109,18 +109,22 @@ public class Player : MonoBehaviour, IDamageable
     public void Dead()
     {
         Debug.Log("Player Dead");
-        Coll.enabled = false;
-        InputManager.enabled = false;
-        Rb.velocity = Vector2.zero;
+        DisablePlayer();
         DOVirtual.DelayedCall(playerData.destroyAfterSeconds, (() =>
         {
             Destroy(gameObject);
             Debug.Log("Player Dead");
             GameManager.Instance.PlayerDied();
         }));
-
     }
 
+    public void DisablePlayer()
+    {
+        InputManager.DisableInput();
+        Coll.enabled = false;
+    }
+    
+    
     IEnumerator DamageAnimation()
     {
         DOTween.To(

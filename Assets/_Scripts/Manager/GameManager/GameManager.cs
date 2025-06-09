@@ -35,14 +35,19 @@ public class GameManager : Singleton<GameManager>
 
     private void RespawnPlayer()
     {
-        Vector2 spawnPosition = RepawnPlayerManager.Instance.GetRespawnPosition();
+        Vector2 spawnPosition = GetRespawnPosition();
         if (spawnPosition == Vector2.zero)
         {
-            spawnPosition = Vector2.zero; // fallback nếu chưa có checkpoint nào
+            spawnPosition = Vector2.zero; 
         }
         Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
     }
 
+    public void OnPauseGame()
+    {
+        Time.timeScale = 0.0f;
+        
+    }
     public void AddLives()
     {
         PlayerLives = Mathf.Clamp(PlayerLives + 1, 0, maxLives);

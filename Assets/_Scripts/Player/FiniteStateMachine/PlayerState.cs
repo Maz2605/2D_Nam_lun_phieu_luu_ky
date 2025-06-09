@@ -77,11 +77,6 @@ public class PlayerState
         IsExitingState = true;
     }
 
-    public virtual void AnimationTrigger()
-    {
-        
-    }
     
-    public virtual void AnimationFinishedTrigger() => IsAnimationFinished = true;
     
 }

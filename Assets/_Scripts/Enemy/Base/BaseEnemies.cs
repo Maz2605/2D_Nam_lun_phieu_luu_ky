@@ -63,10 +63,11 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         {
             case State.Patrol:
                 Anim.SetBool("Attack", false);
+                Anim.SetBool("Patrol", true);
                 Patrol();
                 break;
             case State.Chasing:
-                Anim.SetBool("Attack", true);
+                Anim.SetBool("Patrol", false);
                 Attack();
                 break;
         }
@@ -98,7 +99,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
             CurrentState = State.Patrol;
             return;
         }
-
+        Anim.SetBool("Attack", true);
         float dir = Mathf.Sign(Target.position.x - transform.position.x);
         Rb.velocity = new Vector2(dir * MoveSpeed, Rb.velocity.y);
 

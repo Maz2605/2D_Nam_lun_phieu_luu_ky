@@ -18,6 +18,11 @@ public abstract class Base_Item : MonoBehaviour
         AnimateScaling();
     }
 
+    private void OnDestroy()
+    {
+        DOTween.KillAll(this);
+    }
+
     protected bool IsTrigger = false;
     public abstract void Effect(Player player);
 
