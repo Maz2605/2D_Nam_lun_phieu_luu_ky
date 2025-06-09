@@ -112,7 +112,13 @@ public class Player : MonoBehaviour, IDamageable
         Coll.enabled = false;
         InputManager.enabled = false;
         Rb.velocity = Vector2.zero;
-        Destroy(gameObject, playerData.destroyAfterSeconds);
+        DOVirtual.DelayedCall(playerData.destroyAfterSeconds, (() =>
+        {
+            Destroy(gameObject);
+            Debug.Log("Player Dead");
+            GameManager.Instance.PlayerDied();
+        }));
+
     }
 
     IEnumerator DamageAnimation()

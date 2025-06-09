@@ -89,7 +89,6 @@ public class UIMainMenu : MonoBehaviour
     {
         if (levelIndex == 1)
             return true;
-
         int previousLevel = levelIndex - 1;
         return PlayerPrefs.GetInt("Level_" + previousLevel + "_Completed", 0) == 1;
     }

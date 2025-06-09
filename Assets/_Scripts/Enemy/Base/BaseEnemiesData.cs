@@ -13,7 +13,7 @@ public class BaseEnemiesData : ScriptableObject
     
     [Header("Attack")]
     public float detectRange = 2.5f;
-    private float chaseDistance = 5f;
+    public float chaseDistance = 5f;
     public int knockbackForce = 20;
     public float attackCooldown = 1f;
     public int damage = 20;

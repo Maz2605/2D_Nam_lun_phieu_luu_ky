@@ -27,7 +27,7 @@ public abstract class Base_Item : MonoBehaviour
         {
             Effect(other.gameObject.GetComponent<Player>());
             IsTrigger = true;
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
     

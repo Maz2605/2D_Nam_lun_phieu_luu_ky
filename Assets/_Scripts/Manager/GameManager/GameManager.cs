@@ -1,23 +1,61 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
+using System;
 
 public class GameManager : Singleton<GameManager>
 {
-    public int playerLive = 3;
+    [SerializeField] private GameObject playerPrefab;
+    private Vector2 currentRespawnPosition;
 
-    private bool isProtect = false;
+    private int maxLives = 3;
+    public int PlayerLives { get; private set; }
+
+    public event Action<int> OnPlayerLivesChanged;
+
     protected override void Awake()
     {
-        base.KeepAlive(false);
+        KeepAlive(true);
         base.Awake();
+        PlayerLives = maxLives;
     }
 
-    private void Start()
+    public void PlayerDied()
     {
-        isProtect = false;
+        PlayerLives = Mathf.Clamp(PlayerLives - 1, 0, maxLives);
+        OnPlayerLivesChanged?.Invoke(PlayerLives);
+
+        if (PlayerLives > 0)
+        {
+            RespawnPlayer();
+        }
+        else
+        {
+            Debug.Log("Game Over!");
+        }
+    }
+
+    private void RespawnPlayer()
+    {
+        Vector2 spawnPosition = RepawnPlayerManager.Instance.GetRespawnPosition();
+        if (spawnPosition == Vector2.zero)
+        {
+            spawnPosition = Vector2.zero; // fallback nếu chưa có checkpoint nào
+        }
+        Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+    }
+
+    public void AddLives()
+    {
+        PlayerLives = Mathf.Clamp(PlayerLives + 1, 0, maxLives);
+        OnPlayerLivesChanged?.Invoke(PlayerLives);
+    }
+    
+    public void SetRespawnPosition(Vector2 respawnPosition)
+    {
+        currentRespawnPosition = respawnPosition;
+    }
+
+    public Vector2 GetRespawnPosition()
+    {
+        return currentRespawnPosition;
     }
 }
