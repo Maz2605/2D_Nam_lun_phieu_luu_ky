@@ -1,125 +1,163 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    
-    [Header("Audio Souce")]
+    [Header("Audio Manager")]
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource soundSource;
-
-    [Header("Audio Clip")]
-    [SerializeField] private AudioClip buttonClick;
-    [SerializeField] private AudioClip toggleClickOn;
-    [SerializeField] private AudioClip toggleClickOff;
-
-    [Space] [Header("Audio in Game")]
-    [SerializeField] private AudioClip musicBG;
-    [SerializeField] private AudioClip musicInGame;
-    [SerializeField] private AudioClip soundConnect;
-    [SerializeField] private AudioClip soundWin;
-    [SerializeField] private AudioClip soundFail;
+    [SerializeField] private AudioSource sfxSource;
     
+    [Header("Audio Clips")]
+    public AudioClip musicBg01;
+    public AudioClip musicBg02;
+    public AudioClip musicBg03;
+    public AudioClip musicBg04;
+    public AudioClip musicWin;
+    public AudioClip musicLose;
+    [Header("Player Sfx Clips")] 
+    public AudioClip sfxJump;
+    public AudioClip sfxHurt;
+    public AudioClip sfxMove;
+    public AudioClip sfxFire;
+    public AudioClip sfxGetItem;
+    public AudioClip sfxCheckPoint;
+    [Header("UI Sfx Clips")]
+    public AudioClip sfxButtonClick;
+    public AudioClip sfxPopUp;
 
+    private readonly string _fileName = "AudioData.json";
+    private string _filePath;
+    private AudioDataManager _audioDataManager;
+    
     protected override void Awake()
     {
-        base.KeepAlive(false);
+        KeepAlive(true);
         base.Awake();
+        _filePath = Path.Combine(Application.persistentDataPath, _fileName);
+        LoadData();
+        ApplySettings();
     }
+
+    #region Json Manager
+    public void SaveData()
+    {
+        string json = JsonUtility.ToJson(_audioDataManager, true);
+        File.WriteAllText(_filePath, json);
+        Debug.Log("Save Data at " + _filePath);
+    }
+
+    public void LoadData()
+    {
+        if (File.Exists(_filePath))
+        {
+            string json = File.ReadAllText(_filePath);
+            _audioDataManager = JsonUtility.FromJson<AudioDataManager>(json);
+            LoadData();
+        }
+        else
+        {
+            _audioDataManager = new AudioDataManager();
+            Debug.Log("Load new data");
+            SaveData();
+        }
+    }
+    private void ApplySettings()
+    {
+        musicSource.volume = _audioDataManager.musicVolume;
+        sfxSource.volume = _audioDataManager.sfxVolume;
+        musicSource.mute = _audioDataManager.musicMuted;
+        sfxSource.mute = _audioDataManager.sfxMuted;
+    }
+    
+
+    #endregion
+    
+    #region Manager
 
     private void Start()
     {
-        SetMuteSound();
-        SetMuteMusic();
+        PlayMusicBg1();
     }
 
-    public void SetMuteSound()
+    public void PlayMusic(AudioClip clip, bool loop = false)
     {
-        if (UIController.Instance.UISetting.IsMuteSound)
-        {
-            soundSource.mute = true;
-            return;
-        }
-        soundSource.mute = false;
-    }
-
-    public void SetMuteMusic()
-    {
-        if (UIController.Instance.UISetting.IsMuteMusic)
-        {
-            soundSource.mute = true;
-        }
-        soundSource.mute = false;
+        if(clip == null) return;
+        musicSource.clip = clip;
+        musicSource.loop = loop;
+        musicSource.Play();
     }
 
     public void StopMusic()
     {
-        if (musicSource.isPlaying)
-        {
-            musicSource.DOFade(0f, 0.5f).OnComplete(() =>
-            {
-                musicSource.Stop();
-            }).SetUpdate(true);
-        }
+        musicSource.Stop();
     }
 
-    public void SetVolume(float volume)
+    public void PlaySfx(AudioClip clip)
     {
-        
+        if (clip == null || sfxSource.mute) return;
+        sfxSource.PlayOneShot(clip);
     }
 
-    public void PlaySFX(AudioClip sound, bool repeat = false)
+    public void SetMusicVolume(float volume)
     {
-        if (UIController.Instance.UISetting.IsMuteSound) return;
-
-        if (sound != null)
-        {
-            if (repeat)
-            {
-                soundSource.loop = true;
-                soundSource.clip = sound;   
-                soundSource.Play();
-            }
-            else
-            {
-                soundSource.loop = false;
-                soundSource.PlayOneShot(sound);
-            }
-        }
+        _audioDataManager.musicVolume = Mathf.Clamp01(volume);
+        musicSource.volume = _audioDataManager.musicVolume;
+        SaveData();
     }
 
-    public void PlaySoundButtonClick()
+    public void SetSfxVolume(float volume)
     {
-        PlaySFX(buttonClick);
+        _audioDataManager.sfxVolume = Mathf.Clamp01(volume);
+        sfxSource.volume = _audioDataManager.sfxVolume;
+        SaveData();
     }
 
-    public void PlaySFXMovement()
+    public void MuteMusic(bool mute)
     {
-        
-    }   
+        _audioDataManager.musicMuted = mute;
+        musicSource.mute = mute;
+        SaveData();
+    }
+
+    public void MuteSfx(bool mute)
+    {
+        _audioDataManager.sfxMuted = mute;
+        sfxSource.mute = mute;
+        SaveData();
+    }
+    #endregion
+
+    #region Sfx
+    public void PlaySfxJump() => PlaySfx(sfxJump);
+    public void PlaySfxHurt() => PlaySfx(sfxHurt);
+    public void PlaySfxMove() => PlaySfx(sfxMove);
+    public void PlaySfxFire() => PlaySfx(sfxFire);
+    public void PlaySfxGetItem() => PlaySfx(sfxGetItem);
+    public void PlaySfxButtonClick() => PlaySfx(sfxButtonClick);
+    public void PlaySfxPopUp() => PlaySfx(sfxPopUp);
     
-    public void PlaySFXJump()
-    {
-        
-    }    
+    #endregion
 
-    public void PlaySFXGetItem()
-    {
-        
-    }    
+    #region Music
 
-    public void PlaySoundWin()
-    {
-        PlaySFX(soundWin);
-    }    
-
-    public void PlaySoundFail()
-    {
-        PlaySFX(soundFail);
-    }  
+    public void PlayMusicBg1() => PlayMusic(musicBg01, true);
+    public void PlayMusicBg2() => PlayMusic(musicBg02, true);
+    public void PlayMusicBg3() => PlayMusic(musicBg03, true);
+    public void PlayMusicBg4() => PlayMusic(musicBg04, true);
+    public void PlayMusicWin() => PlayMusic(musicWin);
+    public void PlayMusicLose() => PlayMusic(musicLose);
     
+    #endregion
+
+    #region Properties
+    public float MusicVolume => _audioDataManager.musicVolume;
+    public float SfxVolume => _audioDataManager.sfxVolume;
+    public bool IsMusicMuted => _audioDataManager.musicMuted;
+    public bool IsSfxMuted => _audioDataManager.sfxMuted;
+    
+    #endregion
 }
-

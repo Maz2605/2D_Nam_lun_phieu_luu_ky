@@ -50,6 +50,7 @@ public class Player : MonoBehaviour, IDamageable
         InAirState = new P_InAirState(this, StateMachine, playerData, "InAir");
         AbilityState = new P_AbilityStates(this, StateMachine, playerData, "Ability");
         JumpState = new P_JumpState(this, StateMachine, playerData, "InAir");
+        GameManager.Instance.RegisterPlayer(this);
     }
 
     private void Start()
@@ -64,13 +65,13 @@ public class Player : MonoBehaviour, IDamageable
         CurrentHealth = playerData.maxHealth;
         playerData.facingDirection = 1;
         StateMachine.Initialize(IdleState);
-        InputManager.EnableInput();
+        ResetPlayer();
     }
 
     private void OnEnable()
     {
         
-        DOTween.Play(gameObject);
+        DOTween.Restart(gameObject);
     }
 
     private void OnDisable()
@@ -110,20 +111,28 @@ public class Player : MonoBehaviour, IDamageable
     {
         Debug.Log("Player Dead");
         DisablePlayer();
-        DOVirtual.DelayedCall(playerData.destroyAfterSeconds, (() =>
+        DOVirtual.DelayedCall(playerData.destroyAfterSeconds, () =>
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             Debug.Log("Player Dead");
             GameManager.Instance.PlayerDied();
-        }));
+        });
     }
 
     public void DisablePlayer()
     {
         InputManager.DisableInput();
         Coll.enabled = false;
+        Rb.velocity = Vector2.zero;
+        
+    }public void ResetPlayer()
+    {
+        InputManager.EnableInput();
+        Coll.enabled = true;
+        Rb.velocity = Vector2.zero;
+        StateMachine.Initialize(IdleState);
+        
     }
-    
     
     IEnumerator DamageAnimation()
     {

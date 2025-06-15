@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class BaseStaticEnemy : MonoBehaviour, IDamageable
 {
-    private Rigidbody2D Rb { get; set; }
+    protected Rigidbody2D Rb { get; set; }
     private Collider2D Coll { get; set; }
     private Animator Anim { get; set; }
+    protected Vector2 StartPos { get; set; }
 
     [SerializeField] private BaseStaticEnemyData staticEnemiesData;
     [SerializeField] private GameObject bulletPrefab;
@@ -46,14 +47,16 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
     {
         FaceDirection = staticEnemiesData.facingDirection;
         CurrentHealth = staticEnemiesData.health;
-        
+        StartPos = transform.position;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (CurrentState == State.Death) return;
 
         DetectPlayer();
+        if(CurrentState == State.Idle)
+            Patrol();
 
         if (CurrentState == State.Attack)
         {
@@ -67,7 +70,7 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
         
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         _fireTimer -= Time.deltaTime;
         if (_fireTimer <= 0f)

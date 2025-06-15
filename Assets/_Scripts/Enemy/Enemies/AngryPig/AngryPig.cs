@@ -6,7 +6,7 @@ public class AngryPig : BaseEnemies
 {
     public override void Attack()
     {
-        MoveSpeed = baseEnemiesData.moveSpeed * 2f;
+        MoveSpeed = baseEnemiesData.moveSpeed * 2.5f;
         base.Attack();
     }
 

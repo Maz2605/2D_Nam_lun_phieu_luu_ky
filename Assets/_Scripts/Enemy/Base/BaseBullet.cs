@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaseBullet : MonoBehaviour
 {
+    [SerializeField] private BaseStaticEnemy Enemy;
     protected Vector2 direction;
     protected Vector2 startPos;
     
@@ -40,6 +41,18 @@ public class BaseBullet : MonoBehaviour
 
     public virtual void Effect(Collider2D collision)
     {
-        
+        Rigidbody2D playerRb = collision.GetComponent<Rigidbody2D>();
+        var dmg = collision.GetComponent<IDamageable>();
+        if (dmg != null && collision.CompareTag("Player"))
+        {
+            dmg.TakeDamage(bulletData.damage);
+            if (playerRb != null)
+            {
+                Vector2 knockbackDir = (collision.transform.position - transform.position).normalized;
+                Vector2 adjustedKnockback = new Vector2(knockbackDir.x, 0.5f).normalized;
+                playerRb.velocity = Vector2.zero; 
+                playerRb.AddForce(adjustedKnockback * bulletData.knockbackForce, ForceMode2D.Impulse);
+            }
+        }
     }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bullet Data
   m_EditorClassIdentifier: 
   damage: 50
-  speed: 5
+  speed: 6
   maxDistance: 25
   knockbackForce: 10

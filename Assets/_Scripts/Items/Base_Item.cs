@@ -18,10 +18,7 @@ public abstract class Base_Item : MonoBehaviour
         AnimateScaling();
     }
 
-    private void OnDestroy()
-    {
-        DOTween.KillAll(this);
-    }
+    
 
     protected bool IsTrigger = false;
     public abstract void Effect(Player player);
@@ -32,7 +29,7 @@ public abstract class Base_Item : MonoBehaviour
         {
             Effect(other.gameObject.GetComponent<Player>());
             IsTrigger = true;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
     

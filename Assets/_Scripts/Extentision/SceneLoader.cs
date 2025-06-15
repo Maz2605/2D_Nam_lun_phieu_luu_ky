@@ -32,7 +32,15 @@ public class SceneLoader : Singleton<SceneLoader>
     }
 
     public void LoadScene(string sceneName)
-    {
+    {   
+        if (sceneName.StartsWith("Level_"))
+        {
+            string levelNumber = sceneName.Replace("Level_", "");
+            if (int.TryParse(levelNumber, out int parsedIndex))
+            {
+                GameManager.Instance.SetCurrentLevelIndex(parsedIndex);
+            }
+        }
         DOVirtual.DelayedCall(0.5f, () => { SceneManager.LoadScene(sceneName); });
     }
 }

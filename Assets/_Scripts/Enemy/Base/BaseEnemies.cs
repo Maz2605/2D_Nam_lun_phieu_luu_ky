@@ -84,6 +84,12 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         if (FaceDirection == -1 && transform.position.x <= StartPos.x - baseEnemiesData.patrolRange ||
             FaceDirection == 1 && transform.position.x >= StartPos.x + baseEnemiesData.patrolRange)
             Flip();
+        Vector2 wallCheckOrigin = transform.position + Vector3.right * FaceDirection * 0.5f;
+        RaycastHit2D wallHit = Physics2D.Raycast(wallCheckOrigin, Vector2.right * FaceDirection, 0.1f, baseEnemiesData.groundMask);
+        if (wallHit.collider != null)
+        {
+            Flip();
+        }
     }
 
     public virtual void Patrol()
@@ -99,14 +105,24 @@ public class BaseEnemies : MonoBehaviour, IDamageable
             CurrentState = State.Patrol;
             return;
         }
+
+        float chaseDistance = Mathf.Abs(transform.position.x - StartPos.x);
+        if (chaseDistance >= baseEnemiesData.patrolRange)
+        {
+            CurrentState = State.Patrol;
+            Target = null;
+            return;
+        }
+
         Anim.SetBool("Attack", true);
         float dir = Mathf.Sign(Target.position.x - transform.position.x);
         Rb.velocity = new Vector2(dir * MoveSpeed, Rb.velocity.y);
 
         if ((dir > 0 && FaceDirection == -1) || (dir < 0 && FaceDirection == 1))
         {
-            Flip();                                     
+            Flip();
         }
+
         Vector2 wallCheckOrigin = transform.position + Vector3.right * FaceDirection * 0.5f;
         RaycastHit2D wallHit = Physics2D.Raycast(wallCheckOrigin, Vector2.right * FaceDirection, 0.1f, baseEnemiesData.groundMask);
         if (wallHit.collider != null)
@@ -116,24 +132,33 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         }
     }
 
+
     void DetectPlayer()
     {
         AttackTimer -= Time.deltaTime;
         Vector2 origin = transform.position;
         Vector2 direction = FaceDirection == 1 ? Vector2.right : Vector2.left;
-        RaycastHit2D hit =
-            Physics2D.Raycast(origin, direction, baseEnemiesData.detectRange, baseEnemiesData.playerMask);
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, baseEnemiesData.detectRange, baseEnemiesData.playerMask);
 
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
-            if (CurrentState != State.Chasing)
+            float chaseDistance = Mathf.Abs(transform.position.x - StartPos.x);
+            if (chaseDistance <= baseEnemiesData.patrolRange)
             {
-                ChasStartPos = transform.position;
+                if (CurrentState != State.Chasing)
+                {
+                    ChasStartPos = transform.position;
+                }
+                CurrentState = State.Chasing;
+                Target = hit.transform;
             }
-            CurrentState = State.Chasing;
-            Target = hit.transform; 
+            else
+            {
+                CurrentState = State.Patrol;
+                Target = null;
+            }
         }
-        else if(hit.collider == null)
+        else if (hit.collider == null)
         {
             if (CurrentState == State.Chasing)
             {
@@ -145,6 +170,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         Debug.DrawRay(origin, direction * baseEnemiesData.detectRange, Color.red);
     }
 
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (CurrentState == State.Dead) return;
@@ -154,8 +180,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
             AttackEffect(other);
         }
     }
-
-    //Hiệu ứng và dame khi tấn công
+    
     protected virtual void AttackEffect(Collision2D other)
     {
     }
@@ -179,7 +204,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     }
     IEnumerator DamageAnimation()
     {
-        DOTween.To(
+        Tween blinkTween = DOTween.To(
                 () => _runtimeMaterial.GetFloat(_blinkStrengthID),
                 x => _runtimeMaterial.SetFloat(_blinkStrengthID, x),
                 1f,
@@ -189,5 +214,9 @@ public class BaseEnemies : MonoBehaviour, IDamageable
             .OnComplete(() => _runtimeMaterial.SetFloat(_blinkStrengthID, 0f));
 
         yield return new WaitForSeconds(0.25f);
+        if (CurrentState == State.Dead)
+        {
+            blinkTween.Kill();
+        }
     }
 }

@@ -8,7 +8,7 @@ public class NextLevel : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneLoader.Instance.LoadScene(sceneName.ToSceneString());
+            GameManager.Instance.OnLevelComplete();
         }
     }
     

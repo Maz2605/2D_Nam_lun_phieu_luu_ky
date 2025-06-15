@@ -15,8 +15,8 @@ MonoBehaviour:
   facingDirection: -1
   health: 100
   destroyAfterSeconds: 2
-  detectionRange: 6
-  attackCooldown: 0.2
+  detectionRange: 8
+  attackCooldown: 0.15
   playerMask:
     serializedVersion: 2
     m_Bits: 64

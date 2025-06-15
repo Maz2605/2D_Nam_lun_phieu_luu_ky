@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingDirection: 1
   health: 100
-  destroyAfterSeconds: 1
-  detectionRange: 3
+  destroyAfterSeconds: 2
+  detectionRange: 5
   attackCooldown: 0.5
   playerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64

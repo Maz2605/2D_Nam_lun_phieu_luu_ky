@@ -85,7 +85,7 @@ public class Singleton <T> : MonoBehaviour where T : MonoBehaviour
     {
         if (!Application.isPlaying)
         {
-            Instance = null;
+            _instance = null;
         }
     }
 }

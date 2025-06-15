@@ -16,6 +16,7 @@ MonoBehaviour:
   health: 100
   destroyAfter: 1
   detectRange: 5
+  chaseDistance: 5
   knockbackForce: 25
   attackCooldown: 1
   damage: 50
@@ -23,7 +24,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   moveSpeed: 4
-  patrolRange: 5
+  patrolRange: 4
   groundMask:
     serializedVersion: 2
     m_Bits: 8
