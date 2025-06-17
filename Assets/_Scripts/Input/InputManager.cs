@@ -15,7 +15,9 @@ public class InputManager : MonoBehaviour
     public int NormInputY {get; private set;}
     
     public bool JumpInput {get; private set;}
-    
+
+    public bool ClickInput { get; private set; }
+
     public bool JumpInputStop { get; private set; }
     
     private float _inputHolderTime = 0.2f;
@@ -49,6 +51,21 @@ public class InputManager : MonoBehaviour
         if (context.canceled)
         {
             JumpInputStop = true;
+        }
+    }
+
+    public void OnClickInput(InputAction.CallbackContext context)
+    {
+        if (!IsInputEnabled) return;
+
+        if (context.started)
+        {
+            ClickInput = true;
+        }
+
+        if (context.canceled)
+        {
+            ClickInput = false;
         }
     }
     public void SetJumpInputFalse() => JumpInput = false;

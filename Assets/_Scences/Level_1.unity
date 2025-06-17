@@ -1143,6 +1143,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7912875605745053456, guid: 1cb5b13197c5d3b49b7502c6f635b5ed, type: 3}
+      propertyPath: muteButton
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8821812954540101112, guid: 1cb5b13197c5d3b49b7502c6f635b5ed, type: 3}
       propertyPath: m_Name
       value: 'UI '

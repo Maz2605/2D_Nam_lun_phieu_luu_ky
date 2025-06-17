@@ -17,6 +17,7 @@ public class Checkpoint : MonoBehaviour
         if (other.CompareTag("Player") && !isActivated)
         {
             isActivated = true;
+            AudioManager.Instance.PlaSfxGetCheckPoint();
             GameManager.Instance.SetRespawnPosition(spawnPoint.transform.position);
             animator.SetBool("IsActive", true);
             SaveCheckpointState();

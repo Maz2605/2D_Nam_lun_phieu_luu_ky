@@ -27,6 +27,7 @@ public abstract class Base_Item : MonoBehaviour
     {
         if (other.CompareTag("Player") && !IsTrigger)
         {
+            AudioManager.Instance.PlaySfxGetItem();
             Effect(other.gameObject.GetComponent<Player>());
             IsTrigger = true;
             gameObject.SetActive(false);

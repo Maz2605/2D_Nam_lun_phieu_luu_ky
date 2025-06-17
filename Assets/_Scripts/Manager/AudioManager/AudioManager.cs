@@ -21,7 +21,6 @@ public class AudioManager : Singleton<AudioManager>
     [Header("Player Sfx Clips")] 
     public AudioClip sfxJump;
     public AudioClip sfxHurt;
-    public AudioClip sfxMove;
     public AudioClip sfxFire;
     public AudioClip sfxGetItem;
     public AudioClip sfxCheckPoint;
@@ -38,8 +37,8 @@ public class AudioManager : Singleton<AudioManager>
         KeepAlive(true);
         base.Awake();
         _filePath = Path.Combine(Application.persistentDataPath, _fileName);
-        LoadData();
-        ApplySettings();
+        ResetData();
+        LoadData(); 
     }
 
     #region Json Manager
@@ -56,7 +55,6 @@ public class AudioManager : Singleton<AudioManager>
         {
             string json = File.ReadAllText(_filePath);
             _audioDataManager = JsonUtility.FromJson<AudioDataManager>(json);
-            LoadData();
         }
         else
         {
@@ -65,7 +63,17 @@ public class AudioManager : Singleton<AudioManager>
             SaveData();
         }
     }
-    private void ApplySettings()
+
+    public void ResetData()
+    {
+        _audioDataManager = new AudioDataManager();
+        _audioDataManager.musicVolume = 0.5f;
+        _audioDataManager.sfxVolume = 0.5f;
+        _audioDataManager.musicMuted = false;
+        _audioDataManager.sfxMuted = false;
+        SaveData();
+    }
+    public void ApplySettings()
     {
         musicSource.volume = _audioDataManager.musicVolume;
         sfxSource.volume = _audioDataManager.sfxVolume;
@@ -77,12 +85,7 @@ public class AudioManager : Singleton<AudioManager>
     #endregion
     
     #region Manager
-
-    private void Start()
-    {
-        PlayMusicBg1();
-    }
-
+    
     public void PlayMusic(AudioClip clip, bool loop = false)
     {
         if(clip == null) return;
@@ -134,11 +137,11 @@ public class AudioManager : Singleton<AudioManager>
     #region Sfx
     public void PlaySfxJump() => PlaySfx(sfxJump);
     public void PlaySfxHurt() => PlaySfx(sfxHurt);
-    public void PlaySfxMove() => PlaySfx(sfxMove);
     public void PlaySfxFire() => PlaySfx(sfxFire);
     public void PlaySfxGetItem() => PlaySfx(sfxGetItem);
     public void PlaySfxButtonClick() => PlaySfx(sfxButtonClick);
     public void PlaySfxPopUp() => PlaySfx(sfxPopUp);
+    public void PlaSfxGetCheckPoint() => PlaySfx(sfxCheckPoint);
     
     #endregion
 

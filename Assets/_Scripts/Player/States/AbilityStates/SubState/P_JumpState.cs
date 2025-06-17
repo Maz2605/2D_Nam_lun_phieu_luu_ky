@@ -14,6 +14,7 @@ public class P_JumpState : P_AbilityStates
     public override void Enter()
     {
         base.Enter();
+        AudioManager.Instance.PlaySfxJump();
         Player.InputManager.SetJumpInputFalse();
         Movement?.SetVelocityY(PlayerData.jumpVelocity);
         IsAbilityDone = true;

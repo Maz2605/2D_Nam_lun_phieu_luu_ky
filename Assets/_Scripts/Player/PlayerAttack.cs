@@ -5,14 +5,9 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public Animator Anim { get; private set; }
+    
     public float jumpForce = 10f;
-
-    private void Start()
-    {
-        Anim = GetComponentInParent<Animator>();
-    }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))

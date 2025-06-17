@@ -23,18 +23,13 @@ public class Player : MonoBehaviour, IDamageable
     public Rigidbody2D Rb { get; private set; }
     
     public InputManager InputManager { get; private set; }
-    
+    [SerializeField] private GameObject gun;
+    [SerializeField] private GameObject shieldVisual;
     [SerializeField] public PlayerData playerData;
     [SerializeField] private Material blinkMaterial;
     private Material runtimeMaterial;
     private int blinkStrengthID;
     public int CurrentHealth { get; private set; }
-    #endregion
-
-    #region Other
-
-    private Vector2 _workspace;
-
     #endregion
     
     #region Unity Functions
@@ -70,7 +65,6 @@ public class Player : MonoBehaviour, IDamageable
 
     private void OnEnable()
     {
-        
         DOTween.Restart(gameObject);
     }
 
@@ -99,6 +93,7 @@ public class Player : MonoBehaviour, IDamageable
     
     public void TakeDamage(int damage)
     {
+        AudioManager.Instance.PlaySfxHurt();
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, playerData.maxHealth);
         Debug.Log("Player Health: " + CurrentHealth);
         StartCoroutine(DamageAnimation());
@@ -125,13 +120,13 @@ public class Player : MonoBehaviour, IDamageable
         Coll.enabled = false;
         Rb.velocity = Vector2.zero;
         
-    }public void ResetPlayer()
+    }
+    public void ResetPlayer()
     {
         InputManager.EnableInput();
         Coll.enabled = true;
         Rb.velocity = Vector2.zero;
         StateMachine.Initialize(IdleState);
-        
     }
     
     IEnumerator DamageAnimation()
@@ -148,7 +143,14 @@ public class Player : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(0.25f);
     }
     #endregion
-    
-    
+
+    #region Extral Skill
+
+    public void EnableGun() => gun.SetActive(true);
+    public void DisableGun() => gun.SetActive(false);
+
+    public void EnableShieldVisual() => shieldVisual.SetActive(true);
+    public void DisableShieldVisual() => shieldVisual.SetActive(false);
+    #endregion
     
 }

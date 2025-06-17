@@ -8,11 +8,10 @@ public class P_MoveState : P_GroundedState
     {
     }
     
-
+    
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        
         Movement?.CheckIfShouldFlip(Player.InputManager.NormInputX);
         Movement?.SetVelocityX(PlayerData.moveSpeed * Player.InputManager.NormInputX * PlayerData.facingDirection);
         

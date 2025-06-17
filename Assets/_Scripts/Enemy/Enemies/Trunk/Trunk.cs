@@ -22,8 +22,6 @@ public class Trunk : BaseStaticEnemy
             Flip();
         }
     }
-
-    
     protected void Flip()
     {
         FaceDirection *= -1;

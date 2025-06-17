@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -12,7 +13,7 @@ public class GameManager : Singleton<GameManager>
     private int _currentLevelIndex;
     private readonly string _fileName = "SaveData.json";
     private string _savePath;
-    public int _maxLives = 3;
+    [FormerlySerializedAs("_maxLives")] public int maxLives = 3;
     public SaveData saveData;
     
     public int PlayerLives { get; private set; }
@@ -35,10 +36,8 @@ public class GameManager : Singleton<GameManager>
         }
         _savePath = Path.Combine(Application.persistentDataPath, _fileName);
         LoadData();
-        PlayerLives = Mathf.Clamp(saveData.Lives, 1, _maxLives);
+        PlayerLives = Mathf.Clamp(saveData.Lives, 1, maxLives);
         saveData.Lives = PlayerLives;
-        SaveData();
-        PlayerLives = saveData.Lives;
         SaveData();
     }
     public void RegisterPlayer(Player player)
@@ -48,7 +47,7 @@ public class GameManager : Singleton<GameManager>
 
     public void PlayerDied()
     {
-        PlayerLives = Mathf.Clamp(PlayerLives - 1, 0, _maxLives);
+        PlayerLives = Mathf.Clamp(PlayerLives - 1, 0, maxLives);
         OnPlayerLivesChanged?.Invoke(PlayerLives);
         SaveData();
 
@@ -79,8 +78,8 @@ public class GameManager : Singleton<GameManager>
 
     public void OnNewGame()
     {
-        PlayerLives = _maxLives;
-        saveData.Lives = _maxLives;
+        PlayerLives = maxLives;
+        saveData.Lives = maxLives;
         SaveData();
         SceneLoader.Instance.LoadScene("Level_1");
     }
@@ -116,7 +115,7 @@ public class GameManager : Singleton<GameManager>
 
     public void AddLives()
     {
-        PlayerLives = Mathf.Clamp(PlayerLives + 1, 0, _maxLives);
+        PlayerLives = Mathf.Clamp(PlayerLives + 1, 0, maxLives);
         OnPlayerLivesChanged?.Invoke(PlayerLives);
     }
 
@@ -180,8 +179,8 @@ public class GameManager : Singleton<GameManager>
 
         saveData = new SaveData();
         saveData.unlockedLevels.Add(1);
-        saveData.Lives = _maxLives;
-        PlayerLives = _maxLives; 
+        saveData.Lives = maxLives;
+        PlayerLives = maxLives; 
         SaveData();
     }
     public void SetCurrentLevelIndex(int levelIndex)
