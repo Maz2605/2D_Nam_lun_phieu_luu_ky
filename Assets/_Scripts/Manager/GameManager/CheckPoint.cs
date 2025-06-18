@@ -19,28 +19,9 @@ public class Checkpoint : MonoBehaviour
             isActivated = true;
             AudioManager.Instance.PlaSfxGetCheckPoint();
             GameManager.Instance.SetRespawnPosition(spawnPoint.transform.position);
-            animator.SetBool("IsActive", true);
-            SaveCheckpointState();
-        }
-    }
-
-    private void SaveCheckpointState()
-    {
-        PlayerPrefs.SetInt($"Checkpoint_{transform.position.x}_{transform.position.y}", 1);
-    }
-
-    private void LoadCheckpointState()
-    {
-        int saved = PlayerPrefs.GetInt($"Checkpoint_{transform.position.x}_{transform.position.y}", 0);
-        if (saved == 1)
-        {
-            isActivated = true;
+            GameManager.Instance.SaveData(); // ← Lưu JSON sau khi chạm checkpoint
             animator.SetBool("IsActive", true);
         }
     }
-
-    private void Start()
-    {
-        LoadCheckpointState();
-    }
+    
 }

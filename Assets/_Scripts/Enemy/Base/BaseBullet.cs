@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseBullet : MonoBehaviour
+public class    BaseBullet : MonoBehaviour
 {
-    [SerializeField] private BaseStaticEnemy Enemy;
     protected Vector2 direction;
     protected Vector2 startPos;
-    
+
     [SerializeField] protected BaseBulletData bulletData;
 
-    public virtual void SetDirection(Vector2 dir)
+    public virtual void SetDirectionFromEnemy(int faceDirection)
     {
-        direction = dir.normalized;
+        direction = new Vector2(faceDirection, 0).normalized;
         startPos = transform.position;
     }
-    
+
     protected virtual void Update()
     {
         transform.Translate(direction * bulletData.speed * Time.deltaTime);
@@ -43,16 +42,17 @@ public class BaseBullet : MonoBehaviour
     {
         Rigidbody2D playerRb = collision.GetComponent<Rigidbody2D>();
         var dmg = collision.GetComponent<IDamageable>();
-        if (dmg != null && collision.CompareTag("Player"))
+        if (dmg != null)
         {
             dmg.TakeDamage(bulletData.damage);
             if (playerRb != null)
             {
                 Vector2 knockbackDir = (collision.transform.position - transform.position).normalized;
                 Vector2 adjustedKnockback = new Vector2(knockbackDir.x, 0.5f).normalized;
-                playerRb.velocity = Vector2.zero; 
+                playerRb.velocity = Vector2.zero;
                 playerRb.AddForce(adjustedKnockback * bulletData.knockbackForce, ForceMode2D.Impulse);
             }
         }
     }
 }
+

@@ -64,10 +64,9 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
         }
     }
 
-
     public virtual void Patrol()
     {
-        
+        // Optional: Implement patrol logic for static enemies if needed
     }
 
     public virtual void Attack()
@@ -105,11 +104,29 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
 
     void Shoot()
     {
-        if (bulletPrefab == null || firePoint == null) return;
+        if (bulletPrefab == null || firePoint == null)
+        {
+            Debug.LogWarning("BulletPrefab or FirePoint is not assigned.");
+            return;
+        }
 
         GameObject bullet = PoolingManager.Instance.Spawn(bulletPrefab, firePoint.position, Quaternion.identity);
-        Vector2 shootDir = firePoint.right.normalized;
-        bullet.GetComponent<BaseBullet>().SetDirection(shootDir * FaceDirection);
+
+        if (bullet == null)
+        {
+            Debug.LogWarning("Bullet could not be spawned from PoolingManager.");
+            return;
+        }
+
+        BaseBullet bulletScript = bullet.GetComponent<BaseBullet>();
+        if (bulletScript == null)
+        {
+            Debug.LogWarning("Spawned bullet does not have BaseBullet component.");
+            return;
+        }
+
+        bulletScript.SetDirectionFromEnemy(FaceDirection);
+        Debug.Log("Bullet spawned and direction set: " + FaceDirection);
     }
 
     public void TakeDamage(int damage)

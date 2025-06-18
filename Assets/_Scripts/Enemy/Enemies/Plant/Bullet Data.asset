@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 50
   speed: 6
-  maxDistance: 25
+  maxDistance: 30
   knockbackForce: 10

@@ -119,7 +119,7 @@ public class Player : MonoBehaviour, IDamageable
         InputManager.DisableInput();
         Coll.enabled = false;
         Rb.velocity = Vector2.zero;
-        
+        gun.SetActive(false);
     }
     public void ResetPlayer()
     {

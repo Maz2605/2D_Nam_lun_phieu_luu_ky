@@ -3,28 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Trunk : BaseStaticEnemy
+public class Trunk : BaseEnemies
 {
-    public int patrolRange = 5;
-    public int moveSpeed = 2;
-    
-    public override void Patrol()
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject bulletPrefab;
+    private float _fireTimer = 0f;
+    public float cooldown = 0.5f;
+
+    public override void Attack()
     {
-        base.Patrol();
-        Rb.velocity = new Vector2(FaceDirection * moveSpeed, Rb.velocity.y);
-        if (FaceDirection == -1 && transform.position.x <= StartPos.x - patrolRange ||
-            FaceDirection == 1 && transform.position.x >= StartPos.x + patrolRange)
-            Flip();
-        Vector2 wallCheckOrigin = transform.position + Vector3.right * FaceDirection * 0.5f;
-        RaycastHit2D wallHit = Physics2D.Raycast(wallCheckOrigin, Vector2.right * FaceDirection, 0.1f, LayerMask.GetMask("Map"));
-        if (wallHit.collider != null)
+        base.Attack();
+        _fireTimer -= Time.deltaTime;
+        if (_fireTimer <= 0f)
         {
-            Flip();
+            _fireTimer = cooldown;
+            Shoot();
         }
     }
-    protected void Flip()
+
+    void Shoot()
     {
-        FaceDirection *= -1;
-        Rb.transform.Rotate(0f, 180f, 0f);
+        if(bulletPrefab == null) return;
+        GameObject bullet = PoolingManager.Instance.Spawn(bulletPrefab, firePoint.position, Quaternion.identity);
+        bullet.GetComponent<BaseBullet>().SetDirectionFromEnemy(FaceDirection);
     }
 }

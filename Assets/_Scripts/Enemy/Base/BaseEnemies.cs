@@ -4,38 +4,31 @@ using UnityEngine;
 
 public class BaseEnemies : MonoBehaviour, IDamageable
 {
-    
     public Rigidbody2D Rb { get; set; }
     public Animator Anim { get; set; }
     private Collider2D Coll { get; set; }
+
     [SerializeField] private Material blinkMaterial;
     private Material _runtimeMaterial;
     private int _blinkStrengthID;
-    public int FaceDirection { get; set; }
 
+    public int FaceDirection { get; set; }
     public int CurrentHealth { get; set; }
 
     protected Vector2 StartPos;
-    protected Vector2 ChasStartPos;
     protected Transform Target;
     protected float AttackTimer = 0f;
 
     [SerializeField] protected BaseEnemiesData baseEnemiesData;
     protected float MoveSpeed;
 
-    public enum State
-    {
-        Patrol,
-        Chasing,
-        Dead
-    }
-
+    public enum State { Patrol, Chasing, Dead }
     protected State CurrentState = State.Patrol;
 
     protected virtual void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();
-        Anim = GetComponent<Animator>(); 
+        Anim = GetComponent<Animator>();
         Coll = GetComponent<Collider2D>();
         _runtimeMaterial = new Material(blinkMaterial);
         GetComponent<SpriteRenderer>().material = _runtimeMaterial;
@@ -58,7 +51,11 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     private void FixedUpdate()
     {
         if (CurrentState == State.Dead) return;
+        HandleState();
+    }
 
+    private void HandleState()
+    {
         switch (CurrentState)
         {
             case State.Patrol:
@@ -84,12 +81,18 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         if (FaceDirection == -1 && transform.position.x <= StartPos.x - baseEnemiesData.patrolRange ||
             FaceDirection == 1 && transform.position.x >= StartPos.x + baseEnemiesData.patrolRange)
             Flip();
-        Vector2 wallCheckOrigin = transform.position + Vector3.right * FaceDirection * 0.5f;
-        RaycastHit2D wallHit = Physics2D.Raycast(wallCheckOrigin, Vector2.right * FaceDirection, 0.1f, baseEnemiesData.groundMask);
-        if (wallHit.collider != null)
+
+        if (IsWallAhead())
         {
             Flip();
         }
+    }
+
+    protected bool IsWallAhead()
+    {
+        Vector2 wallCheckOrigin = transform.position + Vector3.right * FaceDirection * 0.5f;
+        RaycastHit2D wallHit = Physics2D.Raycast(wallCheckOrigin, Vector2.right * FaceDirection, 0.1f, baseEnemiesData.groundMask);
+        return wallHit.collider != null;
     }
 
     public virtual void Patrol()
@@ -123,15 +126,12 @@ public class BaseEnemies : MonoBehaviour, IDamageable
             Flip();
         }
 
-        Vector2 wallCheckOrigin = transform.position + Vector3.right * FaceDirection * 0.5f;
-        RaycastHit2D wallHit = Physics2D.Raycast(wallCheckOrigin, Vector2.right * FaceDirection, 0.1f, baseEnemiesData.groundMask);
-        if (wallHit.collider != null)
+        if (IsWallAhead())
         {
             CurrentState = State.Patrol;
             Target = null;
         }
     }
-
 
     void DetectPlayer()
     {
@@ -145,10 +145,6 @@ public class BaseEnemies : MonoBehaviour, IDamageable
             float chaseDistance = Mathf.Abs(transform.position.x - StartPos.x);
             if (chaseDistance <= baseEnemiesData.patrolRange)
             {
-                if (CurrentState != State.Chasing)
-                {
-                    ChasStartPos = transform.position;
-                }
                 CurrentState = State.Chasing;
                 Target = hit.transform;
             }
@@ -158,29 +154,25 @@ public class BaseEnemies : MonoBehaviour, IDamageable
                 Target = null;
             }
         }
-        else if (hit.collider == null)
+        else if (hit.collider == null && CurrentState == State.Chasing)
         {
-            if (CurrentState == State.Chasing)
-            {
-                CurrentState = State.Patrol;
-                Target = null;
-            }
+            CurrentState = State.Patrol;
+            Target = null;
         }
 
         Debug.DrawRay(origin, direction * baseEnemiesData.detectRange, Color.red);
     }
 
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (CurrentState == State.Dead) return;
-        
-        if ( other.gameObject.CompareTag("Player")&& AttackTimer <= 0f)
+
+        if (other.gameObject.CompareTag("Player") && AttackTimer <= 0f)
         {
             AttackEffect(other);
         }
     }
-    
+
     protected virtual void AttackEffect(Collision2D other)
     {
     }
@@ -202,16 +194,16 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         if (CurrentHealth == 0)
             Dead();
     }
+
     IEnumerator DamageAnimation()
     {
         Tween blinkTween = DOTween.To(
-                () => _runtimeMaterial.GetFloat(_blinkStrengthID),
-                x => _runtimeMaterial.SetFloat(_blinkStrengthID, x),
-                1f,
-                0.1f
-            )
-            .SetLoops(2, LoopType.Yoyo)
-            .OnComplete(() => _runtimeMaterial.SetFloat(_blinkStrengthID, 0f));
+            () => _runtimeMaterial.GetFloat(_blinkStrengthID),
+            x => _runtimeMaterial.SetFloat(_blinkStrengthID, x),
+            1f,
+            0.1f)
+        .SetLoops(2, LoopType.Yoyo)
+        .OnComplete(() => _runtimeMaterial.SetFloat(_blinkStrengthID, 0f));
 
         yield return new WaitForSeconds(0.25f);
         if (CurrentState == State.Dead)

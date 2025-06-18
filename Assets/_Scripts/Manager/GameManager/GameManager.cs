@@ -122,6 +122,8 @@ public class GameManager : Singleton<GameManager>
     public void SetRespawnPosition(Vector2 respawnPosition)
     {
         _currentRespawnPosition = respawnPosition;
+        string sceneName = SceneManager.GetActiveScene().name;
+        saveData.checkpoints[sceneName] = respawnPosition;
     }
 
     public Vector2 GetRespawnPosition()
@@ -159,6 +161,15 @@ public class GameManager : Singleton<GameManager>
             string json = File.ReadAllText(_savePath);
             saveData = JsonUtility.FromJson<SaveData>(json);
             PlayerLives = saveData.Lives;
+            string sceneName = SceneManager.GetActiveScene().name;
+            if (saveData.checkpoints.ContainsKey(sceneName))
+            {
+                _currentRespawnPosition = saveData.checkpoints[sceneName];
+            }
+            else
+            {
+                _currentRespawnPosition = Vector2.zero;
+            }
             Debug.Log("Loaded Data");
         }
         else

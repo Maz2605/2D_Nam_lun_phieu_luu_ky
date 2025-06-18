@@ -14,6 +14,7 @@ public class StartPos : MonoBehaviour
         {
             spawnPos = defaultSpawnPoint.position;
             GameManager.Instance.SetRespawnPosition(spawnPos);
+            GameManager.Instance.SaveData(); 
         }
 
         var player = Instantiate(playerPrefab, spawnPos, Quaternion.identity).GetComponent<Player>();
