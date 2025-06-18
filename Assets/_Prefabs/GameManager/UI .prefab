@@ -3488,7 +3488,6 @@ MonoBehaviour:
   gamePlayPanel: {fileID: 3432380711570699883}
   gameOverPanel: {fileID: 8368518579141894822}
   settingButton: {fileID: 6847409419188613853}
-  muteButton: {fileID: 0}
   resumeButton: {fileID: 5447403369739456207}
   restartButton: {fileID: 1582313661292364629}
   playAgainButton: {fileID: 780631085297840192}

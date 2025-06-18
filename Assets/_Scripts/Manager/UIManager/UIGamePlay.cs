@@ -15,7 +15,6 @@ public class UIGamePlay : MonoBehaviour
 
     [Header("Buttons")]
     [SerializeField] private Button settingButton;
-    [SerializeField] private Button muteButton;
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button restartButton;
     [SerializeField] private Button playAgainButton;
