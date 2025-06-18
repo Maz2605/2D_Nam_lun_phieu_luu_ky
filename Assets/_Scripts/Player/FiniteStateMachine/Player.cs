@@ -30,6 +30,7 @@ public class Player : MonoBehaviour, IDamageable
     private Material runtimeMaterial;
     private int blinkStrengthID;
     public int CurrentHealth { get; private set; }
+    public float maxFallSpeed = -25f;
     #endregion
     
     #region Unity Functions
@@ -142,6 +143,16 @@ public class Player : MonoBehaviour, IDamageable
 
         yield return new WaitForSeconds(0.25f);
     }
+    
+    
+
+    private void MaxFallSpeed()
+    {
+        if (Rb.velocity.y < maxFallSpeed)
+        {
+            Rb.velocity = new Vector2(Rb.velocity.x, maxFallSpeed);
+        }
+    } 
     #endregion
 
     #region Extral Skill

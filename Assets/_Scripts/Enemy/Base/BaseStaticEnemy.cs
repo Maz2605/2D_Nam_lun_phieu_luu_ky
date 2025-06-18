@@ -43,7 +43,7 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
         materialID = Shader.PropertyToID("_BlinkStrength");
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         FaceDirection = staticEnemiesData.facingDirection;
         CurrentHealth = staticEnemiesData.health;
