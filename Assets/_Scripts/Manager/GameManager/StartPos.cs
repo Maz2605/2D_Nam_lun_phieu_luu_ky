@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartPos : MonoBehaviour
 {
@@ -9,16 +10,24 @@ public class StartPos : MonoBehaviour
 
     private void Start()
     {
-        Vector2 spawnPos = GameManager.Instance.GetRespawnPosition();
-        if (spawnPos == Vector2.zero)
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        Vector2 spawnPos;
+        if (GameManager.Instance.saveData.checkpointDict.TryGetValue(sceneName, out Vector2 savedPos))
+        {
+            spawnPos = savedPos;
+        }
+        else
         {
             spawnPos = defaultSpawnPoint.position;
-            GameManager.Instance.SetRespawnPosition(spawnPos);
-            GameManager.Instance.SaveData(); 
+            GameManager.Instance.SetRespawnPosition(spawnPos); // Lưu mặc định
+            GameManager.Instance.SaveData();
         }
 
         var player = Instantiate(playerPrefab, spawnPos, Quaternion.identity).GetComponent<Player>();
         GameManager.Instance.RegisterPlayer(player);
-        CameraControl.Instance.SetTarget(player.transform);
+
+        var camera = FindObjectOfType<CameraControl>();
+        camera?.SetTarget(player.transform);
     }
 }

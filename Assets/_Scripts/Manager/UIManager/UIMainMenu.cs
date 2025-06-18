@@ -24,7 +24,7 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private Button level5Button;
 
 
-    private void Awake()
+    protected  void Awake()
     {
         ShowLevelSelectorPanel(true);
         ShowMainSelectorPanel(false);

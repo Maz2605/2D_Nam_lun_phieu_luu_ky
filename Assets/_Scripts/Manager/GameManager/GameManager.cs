@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -39,6 +40,30 @@ public class GameManager : Singleton<GameManager>
         PlayerLives = Mathf.Clamp(saveData.Lives, 1, maxLives);
         saveData.Lives = PlayerLives;
         SaveData();
+    }
+        
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    protected override void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        string sceneName = scene.name;
+
+        if (saveData.checkpointDict.TryGetValue(sceneName, out Vector2 savedPos))
+        {
+            _currentRespawnPosition = savedPos;
+        }
+        else
+        {
+            _currentRespawnPosition = Vector2.zero;
+        }
     }
     public void RegisterPlayer(Player player)
     {
@@ -102,6 +127,13 @@ public class GameManager : Singleton<GameManager>
             AddLives();
         }
         
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (saveData.checkpointDict.ContainsKey(sceneName))
+        {
+            saveData.checkpointDict.Remove(sceneName);
+        }
+
+        SaveData(); 
         Time.timeScale = 1.0f;
         SceneLoader.Instance.LoadScene("Level_" + _currentLevelIndex);
     }
@@ -123,7 +155,7 @@ public class GameManager : Singleton<GameManager>
     {
         _currentRespawnPosition = respawnPosition;
         string sceneName = SceneManager.GetActiveScene().name;
-        saveData.checkpoints[sceneName] = respawnPosition;
+        saveData.checkpointDict[sceneName] = respawnPosition;
     }
 
     public Vector2 GetRespawnPosition()
@@ -148,9 +180,16 @@ public class GameManager : Singleton<GameManager>
     public void SaveData()
     {
         saveData.Lives = PlayerLives;
+
+        // Convert dictionary to list
+        saveData.checkpoints = new List<CheckpointData>();
+        foreach (var kvp in saveData.checkpointDict)
+        {
+            saveData.checkpoints.Add(new CheckpointData(kvp.Key, kvp.Value));
+        }
+
         string json = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(_savePath, json);
-        Debug.Log(_savePath);
         Debug.Log("Saved Data");
     }
 
@@ -160,22 +199,22 @@ public class GameManager : Singleton<GameManager>
         {
             string json = File.ReadAllText(_savePath);
             saveData = JsonUtility.FromJson<SaveData>(json);
+
+            // Convert list to dictionary
+            saveData.checkpointDict = new Dictionary<string, Vector2>();
+            foreach (var cp in saveData.checkpoints)
+            {
+                saveData.checkpointDict[cp.sceneName] = cp.position;
+            }
+
             PlayerLives = saveData.Lives;
-            string sceneName = SceneManager.GetActiveScene().name;
-            if (saveData.checkpoints.ContainsKey(sceneName))
-            {
-                _currentRespawnPosition = saveData.checkpoints[sceneName];
-            }
-            else
-            {
-                _currentRespawnPosition = Vector2.zero;
-            }
             Debug.Log("Loaded Data");
         }
         else
         {
             saveData = new SaveData();
             saveData.unlockedLevels.Add(1);
+            saveData.Lives = maxLives;
             PlayerLives = saveData.Lives;
             SaveData();
         }
@@ -198,4 +237,6 @@ public class GameManager : Singleton<GameManager>
     {
         _currentLevelIndex = levelIndex;
     }
+    private void OnApplicationQuit() => SaveData();
+    private void OnApplicationPause(bool pause) { if (pause) SaveData(); }
 }

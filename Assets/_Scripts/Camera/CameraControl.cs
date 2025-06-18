@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControl : Singleton<CameraControl>
+public class CameraControl : MonoBehaviour
 {
     private Transform playerTransform;
 
@@ -15,12 +15,7 @@ public class CameraControl : Singleton<CameraControl>
     public Vector2 maxLimits;
 
     private Vector3 velocity = Vector3.zero;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        KeepAlive(true);
-    }
+    
 
     private void FixedUpdate()
     {

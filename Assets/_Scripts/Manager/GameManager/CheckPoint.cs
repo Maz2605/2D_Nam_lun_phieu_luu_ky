@@ -4,8 +4,8 @@ public class Checkpoint : MonoBehaviour
 {
     private Animator animator;
     private bool isActivated;
-    [SerializeField]
-    private GameObject spawnPoint;
+    
+    [SerializeField] private GameObject spawnPoint;
 
     private void Awake()
     {
@@ -18,8 +18,10 @@ public class Checkpoint : MonoBehaviour
         {
             isActivated = true;
             AudioManager.Instance.PlaSfxGetCheckPoint();
+
             GameManager.Instance.SetRespawnPosition(spawnPoint.transform.position);
-            GameManager.Instance.SaveData(); // ← Lưu JSON sau khi chạm checkpoint
+            GameManager.Instance.SaveData();
+
             animator.SetBool("IsActive", true);
         }
     }

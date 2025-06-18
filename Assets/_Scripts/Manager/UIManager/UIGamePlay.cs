@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UIGamePlay : MonoBehaviour
@@ -26,6 +20,8 @@ public class UIGamePlay : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
 
     private readonly float[] _volumeValues = {0f, 0.25f, 0.5f, 0.75f, 1f};
+    
+
     private void Start()
     {
         UpdateCameraForCanvas();
@@ -65,7 +61,8 @@ public class UIGamePlay : MonoBehaviour
         Canvas canvas = GetComponent<Canvas>();
         if (canvas != null)
         {
-            canvas.worldCamera = Camera.main;
+            if (canvas.worldCamera == null || canvas.worldCamera != Camera.main)
+                canvas.worldCamera = Camera.main;
         }
     }
 
