@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TrunkBullet
   m_EditorClassIdentifier: 
   damage: 50
-  speed: 5
-  maxDistance: 10
+  speed: 10
+  maxDistance: 20
   knockbackForce: 10

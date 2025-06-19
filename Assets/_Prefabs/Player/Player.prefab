@@ -655,6 +655,7 @@ MonoBehaviour:
   shieldVisual: {fileID: 1837118485771958806}
   playerData: {fileID: 11400000, guid: 983840756fc58e34aa91bc0f0be148e0, type: 2}
   blinkMaterial: {fileID: 2100000, guid: 23561e08b5983fb45830560ed10c1b8f, type: 2}
+  maxFallSpeed: -25
 --- !u!95 &8391044066987375245
 Animator:
   serializedVersion: 5
@@ -747,8 +748,8 @@ Transform:
   m_GameObject: {fileID: 6901727175863943916}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18, y: -1.367, z: 0}
-  m_LocalScale: {x: 1.0005282, y: 0.20234571, z: 1}
+  m_LocalPosition: {x: 0.324, y: -1.326, z: 0}
+  m_LocalScale: {x: 1.38, y: 0.20234571, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2159810349257706439}

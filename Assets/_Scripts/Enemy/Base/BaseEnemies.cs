@@ -18,6 +18,8 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     protected Vector2 StartPos;
     protected Transform Target;
     protected float AttackTimer = 0f;
+    private Coroutine _loseTargetCoroutine;
+
 
     [SerializeField] protected BaseEnemiesData baseEnemiesData;
     protected float MoveSpeed;
@@ -105,8 +107,15 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     {
         if (Target == null)
         {
-            CurrentState = State.Patrol;
+            if (_loseTargetCoroutine == null)
+                _loseTargetCoroutine = StartCoroutine(DelayToReturnToPatrol());
             return;
+        }
+        
+        if (_loseTargetCoroutine != null)
+        {
+            StopCoroutine(_loseTargetCoroutine);
+            _loseTargetCoroutine = null;
         }
 
         float chaseDistance = Mathf.Abs(transform.position.x - StartPos.x);
@@ -211,4 +220,17 @@ public class BaseEnemies : MonoBehaviour, IDamageable
             blinkTween.Kill();
         }
     }
+    private IEnumerator DelayToReturnToPatrol()
+    {
+        yield return new WaitForSeconds(5f);
+        
+        if (Target == null)
+        {
+            CurrentState = State.Patrol;
+        }
+
+        _loseTargetCoroutine = null;
+    }
 }
+
+
