@@ -146,7 +146,7 @@ public class Player : MonoBehaviour, IDamageable
     
     
 
-    private void MaxFallSpeed()
+    public void MaxFallSpeed()
     {
         if (Rb.velocity.y < maxFallSpeed)
         {

@@ -20,6 +20,7 @@ public class P_InAirState : PlayerState
 
         CheckCoyoteTime();
         CheckJumpMultipler();
+        Player.MaxFallSpeed();
 
         if (IsGrounded && Movement.CurVelocity.y <= 0.01f)
         {
@@ -67,6 +68,7 @@ public class P_InAirState : PlayerState
         }
     }
 
+    
     public void SetIsJumpingTrue() => _isJumping = true;
     
 }

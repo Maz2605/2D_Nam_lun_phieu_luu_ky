@@ -64,6 +64,11 @@ public class BaseEnemies : MonoBehaviour, IDamageable
                 Anim.SetBool("Attack", false);
                 Anim.SetBool("Patrol", true);
                 Patrol();
+                if (_loseTargetCoroutine != null)
+                {
+                    StopCoroutine(_loseTargetCoroutine);
+                    _loseTargetCoroutine = null;
+                }
                 break;
             case State.Chasing:
                 Anim.SetBool("Patrol", false);
@@ -93,7 +98,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     protected bool IsWallAhead()
     {
         Vector2 wallCheckOrigin = transform.position + Vector3.right * FaceDirection * 0.5f;
-        RaycastHit2D wallHit = Physics2D.Raycast(wallCheckOrigin, Vector2.right * FaceDirection, 0.1f, baseEnemiesData.groundMask);
+        RaycastHit2D wallHit = Physics2D.Raycast(wallCheckOrigin, Vector2.right * FaceDirection, 0.5f, baseEnemiesData.groundMask);
         return wallHit.collider != null;
     }
 
@@ -111,7 +116,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
                 _loseTargetCoroutine = StartCoroutine(DelayToReturnToPatrol());
             return;
         }
-        
+
         if (_loseTargetCoroutine != null)
         {
             StopCoroutine(_loseTargetCoroutine);
@@ -127,7 +132,15 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         }
 
         Anim.SetBool("Attack", true);
-        float dir = Mathf.Sign(Target.position.x - transform.position.x);
+        float deltaX = Target.position.x - transform.position.x;
+        
+        if (Mathf.Abs(deltaX) < 0.1f)
+        {
+            Rb.velocity = new Vector2(0f, Rb.velocity.y);
+            return;
+        }
+
+        float dir = Mathf.Sign(deltaX);
         Rb.velocity = new Vector2(dir * MoveSpeed, Rb.velocity.y);
 
         if ((dir > 0 && FaceDirection == -1) || (dir < 0 && FaceDirection == 1))
@@ -137,10 +150,12 @@ public class BaseEnemies : MonoBehaviour, IDamageable
 
         if (IsWallAhead())
         {
-            CurrentState = State.Patrol;
             Target = null;
+            CurrentState = State.Patrol;
         }
     }
+
+
 
     void DetectPlayer()
     {
@@ -165,8 +180,10 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         }
         else if (hit.collider == null && CurrentState == State.Chasing)
         {
-            CurrentState = State.Patrol;
-            Target = null;
+            if (_loseTargetCoroutine == null)
+            {
+                _loseTargetCoroutine = StartCoroutine(DelayToReturnToPatrol());
+            }
         }
 
         Debug.DrawRay(origin, direction * baseEnemiesData.detectRange, Color.red);
@@ -222,10 +239,20 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     }
     private IEnumerator DelayToReturnToPatrol()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         
-        if (Target == null)
+        if (Target != null)
         {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, FaceDirection == 1 ? Vector2.right : Vector2.left, baseEnemiesData.detectRange, baseEnemiesData.playerMask);
+            if (hit.collider == null || !hit.collider.CompareTag("Player"))
+            {
+                Target = null;
+                CurrentState = State.Patrol;
+            }
+        }
+        else
+        {
+            Target = null;
             CurrentState = State.Patrol;
         }
 
