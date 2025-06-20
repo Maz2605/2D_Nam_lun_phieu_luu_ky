@@ -17,6 +17,5 @@ public class Bootstrap : MonoBehaviour
                 Instantiate(prefab).name = prefabName;
             }
         }
-        SceneLoader.Instance.LoadScene("MainMenu");
     }
 }

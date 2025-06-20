@@ -310,9 +310,8 @@ MonoBehaviour:
   musicBg04: {fileID: 8300000, guid: b23252dce38c2d8468040af9dc633c2f, type: 3}
   musicWin: {fileID: 8300000, guid: 3ff4bc3ac0623554eb66604049b293a0, type: 3}
   musicLose: {fileID: 8300000, guid: 9d77922812607434abd17c0a3bff6e97, type: 3}
-  sfxJump: {fileID: 8300000, guid: 6323702c6c4e8684f9aa487ca3974944, type: 3}
+  sfxJump: {fileID: 8300000, guid: 50c2ea8bff49a334d8272db8a51dc153, type: 3}
   sfxHurt: {fileID: 8300000, guid: 4466764396aa99e499f536a2abd70378, type: 3}
-  sfxMove: {fileID: 8300000, guid: db17658c16a5a77468082346111c00cc, type: 3}
   sfxFire: {fileID: 8300000, guid: 4466764396aa99e499f536a2abd70378, type: 3}
   sfxGetItem: {fileID: 8300000, guid: 1b0f3190a2c39184ea71fecefd193c50, type: 3}
   sfxCheckPoint: {fileID: 8300000, guid: 53d0d7efed211e64a8b15d1d98479e61, type: 3}

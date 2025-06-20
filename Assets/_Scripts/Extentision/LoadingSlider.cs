@@ -13,7 +13,7 @@ public class LoadingSlider : MonoBehaviour
     private Slider loadingSlider;
     [SerializeField]
     private TextMeshProUGUI percentageText;
-    public float loadingDuration = 5f;
+    public float loadingDuration = 20f;
     public float extraDelay = 0.5f;  
     public string nextSceneName = "MainMenu";
 
