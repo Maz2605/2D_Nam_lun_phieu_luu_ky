@@ -20,19 +20,20 @@ public class P_InAirState : PlayerState
 
         CheckCoyoteTime();
         CheckJumpMultipler();
+        Player.MaxFallSpeed();
 
         if (IsGrounded && Movement.CurVelocity.y <= 0.01f)
         {
             StateMachine.ChangeState(Player.GroundedState);
         }
-        else if (InputManager.Instance.JumpInput && Player.JumpState.CanJump())
+        else if (Player.InputManager.JumpInput && Player.JumpState.CanJump())
         {
             StateMachine.ChangeState(Player.JumpState);
         }
         else
         {
-            Movement?.CheckIfShouldFlip(InputManager.Instance.NormInputX);
-            Movement?.SetVelocityX(PlayerData.moveSpeed * InputManager.Instance.NormInputX * PlayerData.facingDirection);
+            Movement?.CheckIfShouldFlip(Player.InputManager.NormInputX);
+            Movement?.SetVelocityX(PlayerData.moveSpeed * Player.InputManager.NormInputX * PlayerData.facingDirection);
         }
     }
 
@@ -55,7 +56,7 @@ public class P_InAirState : PlayerState
     {
         if (_isJumping)
         {
-            if (InputManager.Instance.JumpInputStop)
+            if (Player.InputManager.JumpInputStop)
             {
                 Movement?.SetVelocityY(Movement.CurVelocity.y * PlayerData.jumpHeightMultiplier);
                 _isJumping = false;
@@ -67,6 +68,7 @@ public class P_InAirState : PlayerState
         }
     }
 
+    
     public void SetIsJumpingTrue() => _isJumping = true;
     
 }

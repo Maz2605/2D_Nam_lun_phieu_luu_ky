@@ -4,60 +4,62 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Unity.Loading;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class AnimationTranslate : Singleton<AnimationTranslate>
 {
-    [SerializeField] private GameObject animation;
+    [SerializeField] private GameObject loading;
     [SerializeField] private SpriteMask spriteMask;
-    [SerializeField] private SpriteRenderer mushroom;
-    
+    [FormerlySerializedAs("smile")] [SerializeField] private SpriteRenderer mushroom;
+
     [SerializeField] private float duration;
-    [SerializeField] private float speed;
+
     private Action extraEvent;
 
     public Action ExtraEvent
     {
         set => extraEvent = value;
     }
-    
-    public bool IsActive { get; private set; } = false;
 
-    public void DisplayAnim(bool enable, Action onClosed = null)
+    public bool IsActive { get; private set; } = false;
+    public void DisplayLoading(bool enable, Action onClosed = null)
     {
         if (enable)
         {
             mushroom.transform.localScale = Vector3.zero;
             spriteMask.transform.localScale = Vector3.zero;
-            
+
             IsActive = true;
-            animation.SetActive(true);
+            loading.SetActive(true);
             var sequence = DOTween.Sequence();
-            
-            sequence.Append(mushroom.transform.DOScale(Vector3.one * speed, duration).SetEase(Ease.OutQuart));
+
+            sequence.Append(mushroom.transform.DOScale(Vector3.one * 8f, duration).SetEase(Ease.OutQuart));
         }
         else
         {
             spriteMask.transform.localScale = Vector3.zero;
-            mushroom.transform.localScale = Vector3.one * speed;
+            mushroom.transform.localScale = Vector3.one * 8f;
 
-            spriteMask.transform.DOScale(Vector3.one * speed, duration).SetEase(Ease.InQuart).OnComplete(() =>
+            spriteMask.transform.DOScale(Vector3.one * 8f, duration).SetEase(Ease.InQuart).OnComplete(() =>
             {
                 onClosed?.Invoke();
 
                 IsActive = false;
-                animation.SetActive(false);
+                loading.SetActive(false);
             });
         }
     }
+
     public void Loading(Action onLoading = null, Action onClosed = null)
     {
-        DisplayAnim(true);
+        DisplayLoading(true);
 
         DOVirtual.DelayedCall(duration, () => { onLoading?.Invoke(); });
 
         DOVirtual.DelayedCall(3 * duration, () =>
         {
-            DisplayAnim(false, () =>
+            DisplayLoading(false, () =>
             {
                 onClosed?.Invoke();
                 extraEvent?.Invoke();
@@ -65,22 +67,26 @@ public class AnimationTranslate : Singleton<AnimationTranslate>
             });
         });
     }
-    public void StartAnim(Action onClosed = null)
+
+    public void StartLoading(Action onLoading = null)
     {
-        DisplayAnim(true);
+        DisplayLoading(true);
+
+        DOVirtual.DelayedCall(duration, () => { onLoading?.Invoke(); });
+    }
+
+    public void EndLoading(Action onClosed = null)
+    {
         DOVirtual.DelayedCall(duration, () =>
         {
-            onClosed?.Invoke();
+            DisplayLoading(false, () =>
+            {
+                onClosed?.Invoke();
+                extraEvent?.Invoke();
+                extraEvent = null;
+            });
         });
     }
 
-    public void StopAnim(Action onClosed = null)
-    {
-        DOVirtual.DelayedCall(duration, () =>
-        {
-            onClosed?.Invoke();
-            extraEvent?.Invoke();
-            extraEvent = null;
-        });
-    }
+    
 }

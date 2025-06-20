@@ -20,7 +20,7 @@ public class P_IdleState : P_GroundedState
         
         Movement?.SetVelocityX(0f);
         if (IsExitingState) return;
-        if (InputManager.Instance.NormInputX != 0 )
+        if (Player.InputManager.NormInputX != 0 )
         {
             StateMachine.ChangeState(Player.MoveState);
         }

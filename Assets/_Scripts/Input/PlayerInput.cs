@@ -44,6 +44,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Value"",
+                    ""id"": ""92acf52d-6212-4af6-a2c2-d289aaf1171b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -145,6 +154,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4941ec7-d31f-4fbe-8047-3cd91a6a3924"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -155,6 +175,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_BaseMovement = asset.FindActionMap("BaseMovement", throwIfNotFound: true);
         m_BaseMovement_Move = m_BaseMovement.FindAction("Move", throwIfNotFound: true);
         m_BaseMovement_Jump = m_BaseMovement.FindAction("Jump", throwIfNotFound: true);
+        m_BaseMovement_Fire = m_BaseMovement.FindAction("Fire", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -223,12 +244,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IBaseMovementActions> m_BaseMovementActionsCallbackInterfaces = new List<IBaseMovementActions>();
     private readonly InputAction m_BaseMovement_Move;
     private readonly InputAction m_BaseMovement_Jump;
+    private readonly InputAction m_BaseMovement_Fire;
     public struct BaseMovementActions
     {
         private @PlayerInput m_Wrapper;
         public BaseMovementActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_BaseMovement_Move;
         public InputAction @Jump => m_Wrapper.m_BaseMovement_Jump;
+        public InputAction @Fire => m_Wrapper.m_BaseMovement_Fire;
         public InputActionMap Get() { return m_Wrapper.m_BaseMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -244,6 +267,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
         }
 
         private void UnregisterCallbacks(IBaseMovementActions instance)
@@ -254,6 +280,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
         }
 
         public void RemoveCallbacks(IBaseMovementActions instance)
@@ -275,5 +304,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
 }

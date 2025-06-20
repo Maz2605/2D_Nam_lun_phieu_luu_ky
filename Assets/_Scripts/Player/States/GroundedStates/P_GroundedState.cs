@@ -21,7 +21,7 @@ public class P_GroundedState : PlayerState
     {
         base.LogicUpdate();
 
-        if (InputManager.Instance.JumpInput && Player.JumpState.CanJump())
+        if (Player.InputManager.JumpInput && Player.JumpState.CanJump())
         {
             StateMachine.ChangeState(Player.JumpState);
         }
@@ -33,7 +33,7 @@ public class P_GroundedState : PlayerState
         
         if (!IsExitingState)
         {
-            if (InputManager.Instance.NormInputX != 0)
+            if (Player.InputManager.NormInputX != 0)
             {
                 StateMachine.ChangeState(Player.MoveState);
             }

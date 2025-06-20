@@ -8,24 +8,18 @@ public class P_MoveState : P_GroundedState
     {
     }
     
-
+    
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        
-        Movement?.CheckIfShouldFlip(InputManager.Instance.NormInputX);
-        Movement?.SetVelocityX(PlayerData.moveSpeed * InputManager.Instance.NormInputX * PlayerData.facingDirection);
+        Movement?.CheckIfShouldFlip(Player.InputManager.NormInputX);
+        Movement?.SetVelocityX(PlayerData.moveSpeed * Player.InputManager.NormInputX * PlayerData.facingDirection);
         
         if (IsExitingState) return;
-        if (InputManager.Instance.NormInputX == 0)
+        if (Player.InputManager.NormInputX == 0)
         {
             StateMachine.ChangeState(Player.IdleState);
         }
     }
-
-    public override void Exit()
-    {
-        base.Exit();
-        Player.Anim.SetBool("Move", false);
-    }
+    
 }

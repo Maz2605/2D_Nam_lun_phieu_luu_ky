@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "StaticEnemiesData", menuName = "Data/Static Enemies Data")]
 public class BaseStaticEnemyData : ScriptableObject 
 {
+    [Header("Base")]
     public int facingDirection = 1;
     [Header("Health")]
     public int health = 100;

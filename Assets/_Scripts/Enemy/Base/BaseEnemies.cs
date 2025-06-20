@@ -1,43 +1,48 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BaseEnemies : MonoBehaviour, IDamageable
 {
-    private Rigidbody2D Rb { get; set; }
-    private Animator Anim { get; set; }
-    private int FaceDirection { get; set; }
+    public Rigidbody2D Rb { get; set; }
+    public Animator Anim { get; set; }
+    private Collider2D Coll { get; set; }
 
+    [SerializeField] private Material blinkMaterial;
+    private Material _runtimeMaterial;
+    private int _blinkStrengthID;
+
+    public int FaceDirection { get; set; }
     public int CurrentHealth { get; set; }
 
-    protected Vector2 startPos;
-    private Transform target;
-    protected float attackTimer = 0f;
+    protected Vector2 StartPos;
+    protected Transform Target;
+    protected float AttackTimer = 0f;
+    private Coroutine _loseTargetCoroutine;
+
 
     [SerializeField] protected BaseEnemiesData baseEnemiesData;
+    protected float MoveSpeed;
 
-    public enum State
-    {
-        Patrol,
-        Chasing,
-        Dead
-    }
-
+    public enum State { Patrol, Chasing, Dead }
     protected State CurrentState = State.Patrol;
 
     protected virtual void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();
-        Anim = GetComponent<Animator>(); 
+        Anim = GetComponent<Animator>();
+        Coll = GetComponent<Collider2D>();
+        _runtimeMaterial = new Material(blinkMaterial);
+        GetComponent<SpriteRenderer>().material = _runtimeMaterial;
+        _blinkStrengthID = Shader.PropertyToID("_BlinkStrength");
         CurrentHealth = baseEnemiesData.health;
     }
 
     private void Start()
     {
-        startPos = transform.position;
+        StartPos = transform.position;
         FaceDirection = baseEnemiesData.facingDirection;
+        MoveSpeed = baseEnemiesData.moveSpeed;
     }
 
     private void Update()
@@ -48,13 +53,25 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     private void FixedUpdate()
     {
         if (CurrentState == State.Dead) return;
+        HandleState();
+    }
 
+    private void HandleState()
+    {
         switch (CurrentState)
         {
             case State.Patrol:
+                Anim.SetBool("Attack", false);
+                Anim.SetBool("Patrol", true);
                 Patrol();
+                if (_loseTargetCoroutine != null)
+                {
+                    StopCoroutine(_loseTargetCoroutine);
+                    _loseTargetCoroutine = null;
+                }
                 break;
             case State.Chasing:
+                Anim.SetBool("Patrol", false);
                 Attack();
                 break;
         }
@@ -68,9 +85,21 @@ public class BaseEnemies : MonoBehaviour, IDamageable
 
     protected void CheckIfShouldFlip()
     {
-        if (FaceDirection == -1 && transform.position.x <= startPos.x - baseEnemiesData.patrolRange ||
-            FaceDirection == 1 && transform.position.x >= startPos.x + baseEnemiesData.patrolRange)
+        if (FaceDirection == -1 && transform.position.x <= StartPos.x - baseEnemiesData.patrolRange ||
+            FaceDirection == 1 && transform.position.x >= StartPos.x + baseEnemiesData.patrolRange)
             Flip();
+
+        if (IsWallAhead())
+        {
+            Flip();
+        }
+    }
+
+    protected bool IsWallAhead()
+    {
+        Vector2 wallCheckOrigin = transform.position + Vector3.right * FaceDirection * 0.5f;
+        RaycastHit2D wallHit = Physics2D.Raycast(wallCheckOrigin, Vector2.right * FaceDirection, 0.5f, baseEnemiesData.groundMask);
+        return wallHit.collider != null;
     }
 
     public virtual void Patrol()
@@ -81,38 +110,80 @@ public class BaseEnemies : MonoBehaviour, IDamageable
 
     public virtual void Attack()
     {
-        if (target == null)
+        if (Target == null)
         {
-            CurrentState = State.Patrol;
+            if (_loseTargetCoroutine == null)
+                _loseTargetCoroutine = StartCoroutine(DelayToReturnToPatrol());
             return;
         }
 
-        float dir = Mathf.Sign(target.position.x - transform.position.x);
-        Rb.velocity = new Vector2(dir * baseEnemiesData.moveSpeed, Rb.velocity.y);
+        if (_loseTargetCoroutine != null)
+        {
+            StopCoroutine(_loseTargetCoroutine);
+            _loseTargetCoroutine = null;
+        }
+
+        float chaseDistance = Mathf.Abs(transform.position.x - StartPos.x);
+        if (chaseDistance >= baseEnemiesData.patrolRange)
+        {
+            CurrentState = State.Patrol;
+            Target = null;
+            return;
+        }
+
+        Anim.SetBool("Attack", true);
+        float deltaX = Target.position.x - transform.position.x;
+        
+        if (Mathf.Abs(deltaX) < 0.1f)
+        {
+            Rb.velocity = new Vector2(0f, Rb.velocity.y);
+            return;
+        }
+
+        float dir = Mathf.Sign(deltaX);
+        Rb.velocity = new Vector2(dir * MoveSpeed, Rb.velocity.y);
 
         if ((dir > 0 && FaceDirection == -1) || (dir < 0 && FaceDirection == 1))
         {
-            Flip();                                     
+            Flip();
+        }
+
+        if (IsWallAhead())
+        {
+            Target = null;
+            CurrentState = State.Patrol;
         }
     }
 
+
+
     void DetectPlayer()
     {
-        attackTimer -= Time.deltaTime;
+        AttackTimer -= Time.deltaTime;
         Vector2 origin = transform.position;
         Vector2 direction = FaceDirection == 1 ? Vector2.right : Vector2.left;
-        RaycastHit2D hit =
-            Physics2D.Raycast(origin, direction, baseEnemiesData.detectRange, baseEnemiesData.playerMask);
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, baseEnemiesData.detectRange, baseEnemiesData.playerMask);
 
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
-            CurrentState = State.Chasing;
-            target = hit.transform;
+            float chaseDistance = Mathf.Abs(transform.position.x - StartPos.x);
+            if (chaseDistance <= baseEnemiesData.patrolRange)
+            {
+                CurrentState = State.Chasing;
+                Target = hit.transform;
+            }
+            else
+            {
+                CurrentState = State.Patrol;
+                Target = null;
+            }
         }
-        else
+        else if (hit.collider == null && CurrentState == State.Chasing)
         {
-            CurrentState = State.Patrol;
-            target = null;
+            if (_loseTargetCoroutine == null)
+            {
+                _loseTargetCoroutine = StartCoroutine(DelayToReturnToPatrol());
+            }
         }
 
         Debug.DrawRay(origin, direction * baseEnemiesData.detectRange, Color.red);
@@ -122,13 +193,12 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     {
         if (CurrentState == State.Dead) return;
 
-        if (other.gameObject.CompareTag("Player") && attackTimer <= 0f)
+        if (other.gameObject.CompareTag("Player") && AttackTimer <= 0f)
         {
             AttackEffect(other);
         }
     }
 
-    //Hiệu ứng và dame khi tấn công
     protected virtual void AttackEffect(Collision2D other)
     {
     }
@@ -138,16 +208,56 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         if (CurrentState == State.Dead) return;
 
         CurrentState = State.Dead;
-        Rb.velocity = Vector2.zero;
-        Rb.bodyType = RigidbodyType2D.Static;
+        Coll.enabled = false;
         Destroy(gameObject, baseEnemiesData.destroyAfter);
     }
 
     public void TakeDamage(int damage)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, baseEnemiesData.health);
-        Debug.Log(CurrentHealth);
+        Debug.Log("Enemy" + CurrentHealth);
+        StartCoroutine(DamageAnimation());
         if (CurrentHealth == 0)
             Dead();
     }
+
+    IEnumerator DamageAnimation()
+    {
+        Tween blinkTween = DOTween.To(
+            () => _runtimeMaterial.GetFloat(_blinkStrengthID),
+            x => _runtimeMaterial.SetFloat(_blinkStrengthID, x),
+            1f,
+            0.1f)
+        .SetLoops(2, LoopType.Yoyo)
+        .OnComplete(() => _runtimeMaterial.SetFloat(_blinkStrengthID, 0f));
+
+        yield return new WaitForSeconds(0.25f);
+        if (CurrentState == State.Dead)
+        {
+            blinkTween.Kill();
+        }
+    }
+    private IEnumerator DelayToReturnToPatrol()
+    {
+        yield return new WaitForSeconds(2f);
+        
+        if (Target != null)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, FaceDirection == 1 ? Vector2.right : Vector2.left, baseEnemiesData.detectRange, baseEnemiesData.playerMask);
+            if (hit.collider == null || !hit.collider.CompareTag("Player"))
+            {
+                Target = null;
+                CurrentState = State.Patrol;
+            }
+        }
+        else
+        {
+            Target = null;
+            CurrentState = State.Patrol;
+        }
+
+        _loseTargetCoroutine = null;
+    }
 }
+
+

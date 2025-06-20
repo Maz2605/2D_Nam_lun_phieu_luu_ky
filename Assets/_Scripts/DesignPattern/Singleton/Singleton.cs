@@ -81,4 +81,11 @@ public class Singleton <T> : MonoBehaviour where T : MonoBehaviour
         if(_instance == this)
             _instance = null;
     }
+    protected virtual void OnDisable()
+    {
+        if (!Application.isPlaying)
+        {
+            _instance = null;
+        }
+    }
 }

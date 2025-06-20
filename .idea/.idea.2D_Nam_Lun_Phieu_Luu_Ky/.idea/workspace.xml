@@ -6,24 +6,32 @@
   <component name="ChangeListManager">
     <list default="true" id="1f2c5410-5fe1-4605-8ffd-dfd5a39fd628" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2D_Nam_Lun_Phieu_Luu_Ky/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2D_Nam_Lun_Phieu_Luu_Ky/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Temp/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Temp/Player.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scences/Develop.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scences/Develop.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Player_Temp/Njnja/Idle_njnja.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Player_Temp/Njnja/Idle_njnja.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Data.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Data/EnemyData.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Data/EnemyData.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Data/EnemyData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Data/EnemyData.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Items.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Items.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/Data/PlayerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/Data/PlayerData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/States/AbilityStates/P_AbilityState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/States/AbilityStates/P_AbilityState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/States/AbilityStates/SubState/P_JumpState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/States/AbilityStates/SubState/P_JumpState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/States/GroundedStates/P_GroundedState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/States/GroundedStates/P_GroundedState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/States/GroundedStates/SubState/P_IdleState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/States/GroundedStates/SubState/P_IdleState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/States/GroundedStates/SubState/P_MoveState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/States/GroundedStates/SubState/P_MoveState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/States/InAirStates/P_InAirState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/States/InAirStates/P_InAirState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Hit (52x54).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Hit (52x54).png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Hit Wall 1 (52x54).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Hit Wall 1 (52x54).png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Hit Wall 2 (52x54).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Hit Wall 2 (52x54).png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Idle 1 (52x54).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Idle 1 (52x54).png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Idle 2 (52x54).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Idle 2 (52x54).png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/GameManager/AudioManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/GameManager/AudioManager.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scences/Level_3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scences/Level_3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scences/Level_5.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scences/Level_5.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Camera/CameraControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Camera/CameraControl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Ribo.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Ribo/Rino.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Ribo/Rino.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Ribo/Rino.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Ribo/Rino.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Extentision/LoadingSlider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Extentision/LoadingSlider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Items/DrityWater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Items/DrityWater.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Manager/GameManager/Boostrap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Manager/GameManager/Boostrap.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/PlayerState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/PlayerState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,14 +45,45 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6ff3bcb667574bf9a8630184172fcfbf176600/37/905db014/Component.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6ff3bcb667574bf9a8630184172fcfbf176600/38/a467c9cc/SceneManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6ff3bcb667574bf9a8630184172fcfbf176600/8c/4e647469/Transform.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6ff3bcb667574bf9a8630184172fcfbf176600/a1/91e795da/GameObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/de1f8ef4975b4eacbeb0accc1b22c9b02a000/3f/edc382dd/DOTween.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Core/Core.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Enemy/Base/BaseBulletData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Enemy/Base/BaseEnemies.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Enemy/Base/BaseEnemiesData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Enemy/Base/BaseStaticEnemyData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Canon/Cannon.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Canon/CanonBomb.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Chicken/Chicken.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Rock/Rock_1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Extentision/LoadingSlider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Extentision/ScenceName.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Generices/GenericNotImplementError.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Input/InputManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Items/Base_Item.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Items/GunItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Items/ShieldItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Items/Sun.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Manager/GameManager/AnimationTranslate.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Manager/GameManager/Boostrap.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Manager/GameManager/SaveData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/PlayerStateMachine.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Player/Gun.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Player/PlayerBullet.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Trap/Arrow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Trap/Base_Trap.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Trap/BonceTrap.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Trap/SawTrap.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Trap/SpikeHead.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Trap/SprikeTrap.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@2.6.0/Editor/ViewSwitcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.11.2/InputSystem/Editor/UITKAssetEditor/InputActionsEditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.11.0/Editor/UnityPurchasingEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../ThamKhaoProject/Unity-Platformer-Episode-15/Assets/Scripts/UI/UIManager.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -54,21 +93,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ad55f76a&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$USER_HOME$/Downloads/Test\2D_Nam_Lun_Phieu_Luu_Ky.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\Maz\Downloads" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.50f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;F:\Unity\My Project\2D_Nam_Lun_Phieu_Luu_Ky&quot; -debugCodeOptimization" />
@@ -95,10 +142,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="18492">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="18492" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -143,6 +190,22 @@
       <workItem from="1744022904427" duration="1226000" />
       <workItem from="1744127587420" duration="1376000" />
       <workItem from="1744189719284" duration="18664000" />
+      <workItem from="1748856975321" duration="6946000" />
+      <workItem from="1748877360687" duration="9848000" />
+      <workItem from="1749114458023" duration="699000" />
+      <workItem from="1749140200546" duration="17317000" />
+      <workItem from="1749293406586" duration="12093000" />
+      <workItem from="1749317119831" duration="1908000" />
+      <workItem from="1749543174460" duration="9044000" />
+      <workItem from="1749569406151" duration="36684000" />
+      <workItem from="1749675332427" duration="16695000" />
+      <workItem from="1749905617961" duration="6563000" />
+      <workItem from="1749992327190" duration="11841000" />
+      <workItem from="1750040003052" duration="11010000" />
+      <workItem from="1750155238959" duration="22929000" />
+      <workItem from="1750238970886" duration="29599000" />
+      <workItem from="1750315151538" duration="15232000" />
+      <workItem from="1750384501441" duration="417000" />
     </task>
     <servers />
   </component>
@@ -158,5 +221,28 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Worm/Worm.cs</url>
+          <line>7</line>
+          <properties documentPath="F:\Unity\My Project\2D_Nam_Lun_Phieu_Luu_Ky\Assets\_Scripts\Enemy\Enemies\Worm\Worm.cs" containingFunctionPresentation="Method 'Attack'">
+            <startOffsets>
+              <option value="152" />
+            </startOffsets>
+            <endOffsets>
+              <option value="153" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -1,27 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class BaseStaticEnemy : MonoBehaviour, IDamageable
 {
-     private Rigidbody2D Rb { get; set; }
+    protected Rigidbody2D Rb { get; set; }
+    private Collider2D Coll { get; set; }
     private Animator Anim { get; set; }
-    
+    protected Vector2 StartPos { get; set; }
+
     [SerializeField] private BaseStaticEnemyData staticEnemiesData;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
-    
+    [SerializeField] private Transform detectLine;
+    [SerializeField] private Material blinkMaterial;
+    private Material runtimeMaterial;
+    private int materialID;
+
     protected enum State
     {
         Idle,
         Attack,
         Death,
     }
-    
+
     protected State CurrentState = State.Idle;
 
     protected Transform target;
-    
+
     private float _fireTimer = 0f;
     public int CurrentHealth { get; set; }
     public int FaceDirection { get; set; }
@@ -30,35 +37,39 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
     {
         Rb = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
+        Coll = GetComponent<Collider2D>();
+        runtimeMaterial = new Material(blinkMaterial);
+        GetComponent<SpriteRenderer>().material = runtimeMaterial;
+        materialID = Shader.PropertyToID("_BlinkStrength");
+    }
 
+    protected virtual void Start()
+    {
+        FaceDirection = staticEnemiesData.facingDirection;
         CurrentHealth = staticEnemiesData.health;
-        FaceDirection = staticEnemiesData.facingDirection;
+        StartPos = transform.position;
     }
 
-    private void Start()
+    protected virtual void Update()
     {
-        FaceDirection = staticEnemiesData.facingDirection;
-    }
-
-    private void Update()
-    {
-        if(CurrentState == State.Death) return;
+        if (CurrentState == State.Death) return;
 
         DetectPlayer();
-        
+        if(CurrentState == State.Idle)
+            Patrol();
+
         if (CurrentState == State.Attack)
         {
             Attack();
         }
     }
-    
 
-    public void Patrol()
+    public virtual void Patrol()
     {
-        
+        // Optional: Implement patrol logic for static enemies if needed
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         _fireTimer -= Time.deltaTime;
         if (_fireTimer <= 0f)
@@ -70,43 +81,83 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
 
     void DetectPlayer()
     {
-        Vector2 origin = transform.position;
+        Vector2 origin = detectLine.position;
         Vector2 direction = Vector2.right;
-        RaycastHit2D hit = Physics2D.Raycast(origin, direction * FaceDirection, staticEnemiesData.detectionRange, staticEnemiesData.playerMask );
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction * FaceDirection, staticEnemiesData.detectionRange,
+            staticEnemiesData.playerMask);
 
         if (hit.collider != null && hit.collider.gameObject.tag == "Player")
         {
             target = hit.collider.transform;
             CurrentState = State.Attack;
+            Anim.SetBool("Attack", true);
         }
         else
         {
             target = null;
+            Anim.SetBool("Attack", false);
             CurrentState = State.Idle;
         }
+
         Debug.DrawRay(origin, direction * FaceDirection * staticEnemiesData.detectionRange, Color.red);
     }
+
     void Shoot()
     {
-        if (bulletPrefab == null || firePoint == null) return;
+        if (bulletPrefab == null || firePoint == null)
+        {
+            Debug.LogWarning("BulletPrefab or FirePoint is not assigned.");
+            return;
+        }
 
         GameObject bullet = PoolingManager.Instance.Spawn(bulletPrefab, firePoint.position, Quaternion.identity);
-        Vector2 shootDir = firePoint.right.normalized;
-        bullet.GetComponent<BaseBullet>().SetDirection(shootDir * FaceDirection);
+
+        if (bullet == null)
+        {
+            Debug.LogWarning("Bullet could not be spawned from PoolingManager.");
+            return;
+        }
+
+        BaseBullet bulletScript = bullet.GetComponent<BaseBullet>();
+        if (bulletScript == null)
+        {
+            Debug.LogWarning("Spawned bullet does not have BaseBullet component.");
+            return;
+        }
+
+        bulletScript.SetDirectionFromEnemy(FaceDirection);
+        Debug.Log("Bullet spawned and direction set: " + FaceDirection);
     }
 
     public void TakeDamage(int damage)
     {
-        CurrentHealth = Mathf.Clamp(damage, 0, staticEnemiesData.health);
+        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, staticEnemiesData.health);
+        Debug.Log("Enemy: " + CurrentHealth);
+        StartCoroutine(DamageEffect());
+        if (CurrentHealth == 0)
+            Dead();
+    }
+
+    IEnumerator DamageEffect()
+    {
+        DOTween.To(
+                () => runtimeMaterial.GetFloat(materialID),
+                x => runtimeMaterial.SetFloat(materialID, x),
+                1f,
+                0.1f
+            )
+            .SetLoops(2, LoopType.Yoyo)
+            .OnComplete(() => runtimeMaterial.SetFloat(materialID, 0f));
+
+        yield return new WaitForSeconds(0.25f);
     }
 
     public void Dead()
     {
-        if(CurrentState == State.Death) return;
-        
+        if (CurrentState == State.Death) return;
+
         CurrentState = State.Death;
-        Rb.velocity = Vector2.zero;
-        Rb.bodyType = RigidbodyType2D.Static;
+        Coll.enabled = false;
         Destroy(gameObject, staticEnemiesData.destroyAfterSeconds);
     }
 }

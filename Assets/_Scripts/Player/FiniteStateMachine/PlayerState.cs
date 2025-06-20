@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerState
@@ -34,7 +31,7 @@ public class PlayerState
     protected bool IsGrounded;
     
     private string _animName;
-
+    
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animName)
     {
         Player = player;
@@ -57,16 +54,10 @@ public class PlayerState
         Player.Anim.SetBool(_animName, true);
         //Anim
         StartTime = Time.time;
-        Debug.Log(_animName);
         IsAnimationFinished = false;
         IsExitingState = false;
     }
-
-    public virtual void Execute()
-    {
-        
-    }
-
+    
     public virtual void LogicUpdate()
     {
         
@@ -83,11 +74,6 @@ public class PlayerState
         IsExitingState = true;
     }
 
-    public virtual void AnimationTrigger()
-    {
-        
-    }
     
-    public virtual void AnimationFinishedTrigger() => IsAnimationFinished = true;
     
 }

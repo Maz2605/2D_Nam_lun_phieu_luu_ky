@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class P_JumpState : P_AbilityStates
@@ -13,10 +14,16 @@ public class P_JumpState : P_AbilityStates
     public override void Enter()
     {
         base.Enter();
-        InputManager.Instance.SetJumpInputFalse();
+        AudioManager.Instance.PlaySfxJump();
+        Player.InputManager.SetJumpInputFalse();
         Movement?.SetVelocityY(PlayerData.jumpVelocity);
         IsAbilityDone = true;
         _amountOfJumpLeft--;
+        // if (_amountOfJumpLeft == 0)
+        // {
+        //     Player.transform.DORotate(new Vector3(0, 0, -360f), 0.5f, RotateMode.FastBeyond360)
+        //         .SetEase(Ease.Linear);
+        // }
         Player.InAirState.SetIsJumpingTrue();
     }
 

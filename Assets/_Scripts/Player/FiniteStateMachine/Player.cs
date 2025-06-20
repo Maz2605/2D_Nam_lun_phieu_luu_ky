@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     #region States
 
@@ -20,13 +22,15 @@ public class Player : MonoBehaviour
     public BoxCollider2D Coll { get; private set; }
     public Rigidbody2D Rb { get; private set; }
     
+    public InputManager InputManager { get; private set; }
+    [SerializeField] private GameObject gun;
+    [SerializeField] private GameObject shieldVisual;
     [SerializeField] public PlayerData playerData;
-    #endregion
-
-    #region Other
-
-    private Vector2 _workspace;
-
+    [SerializeField] private Material blinkMaterial;
+    private Material runtimeMaterial;
+    private int blinkStrengthID;
+    public int CurrentHealth { get; private set; }
+    public float maxFallSpeed = -25f;
     #endregion
     
     #region Unity Functions
@@ -36,12 +40,13 @@ public class Player : MonoBehaviour
         Core = GetComponentInChildren<Core>();
         
         StateMachine = new PlayerStateMachine();
-        IdleState = new P_IdleState(this, StateMachine, playerData, "Idle");
-        MoveState = new P_MoveState(this, StateMachine, playerData, "Move");
+        IdleState = new P_IdleState(this, StateMachine, playerData, "Grounded");
+        MoveState = new P_MoveState(this, StateMachine, playerData, "Grounded");
         GroundedState = new P_GroundedState(this, StateMachine, playerData, "Grounded");
         InAirState = new P_InAirState(this, StateMachine, playerData, "InAir");
         AbilityState = new P_AbilityStates(this, StateMachine, playerData, "Ability");
         JumpState = new P_JumpState(this, StateMachine, playerData, "InAir");
+        GameManager.Instance.RegisterPlayer(this);
     }
 
     private void Start()
@@ -49,41 +54,114 @@ public class Player : MonoBehaviour
         Anim = GetComponent<Animator>();
         Coll = GetComponent<BoxCollider2D>();
         Rb = GetComponent<Rigidbody2D>();
+        runtimeMaterial = new Material(blinkMaterial);
+        GetComponent<SpriteRenderer>().material = runtimeMaterial;
+        blinkStrengthID = Shader.PropertyToID("_BlinkStrength");
+        InputManager = GetComponent<InputManager>();
+        CurrentHealth = playerData.maxHealth;
         playerData.facingDirection = 1;
         StateMachine.Initialize(IdleState);
+        ResetPlayer();
+    }
+
+    private void OnEnable()
+    {
+        DOTween.Restart(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        DOTween.Pause(gameObject);  
     }
 
     private void Update()
     {
         Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
+        
     }
 
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
+        Anim.SetFloat("xVelocity", Mathf.Abs(Rb.velocity.x));
+        Anim.SetFloat("yVelocity", Rb.velocity.y);
     }
 
     #endregion
 
     #region Other Funtions
-
-    private void AninmationTrigger()
+    
+    public void TakeDamage(int damage)
     {
-        StateMachine.CurrentState.AnimationTrigger();
+        AudioManager.Instance.PlaySfxHurt();
+        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, playerData.maxHealth);
+        Debug.Log("Player Health: " + CurrentHealth);
+        StartCoroutine(DamageAnimation());
+        Anim.SetTrigger("Hit");
+        if(CurrentHealth == 0)
+            Dead();
     }
 
-    private void AnimationFinishedTrigger()
+    public void Dead()
     {
-        StateMachine.CurrentState.AnimationFinishedTrigger();
+        Debug.Log("Player Dead");
+        DisablePlayer();
+        DOVirtual.DelayedCall(playerData.destroyAfterSeconds, () =>
+        {
+            gameObject.SetActive(false);
+            Debug.Log("Player Dead");
+            GameManager.Instance.PlayerDied();
+        });
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void DisablePlayer()
     {
-        var Item = other.gameObject.GetComponent<Base_Item>();
-        Item.Effect(this);
+        InputManager.DisableInput();
+        Coll.enabled = false;
+        Rb.velocity = Vector2.zero;
+        gun.SetActive(false);
     }
+    public void ResetPlayer()
+    {
+        InputManager.EnableInput();
+        Coll.enabled = true;
+        Rb.velocity = Vector2.zero;
+        StateMachine.Initialize(IdleState);
+    }
+    
+    IEnumerator DamageAnimation()
+    {
+        DOTween.To(
+                () => runtimeMaterial.GetFloat(blinkStrengthID),
+                x => runtimeMaterial.SetFloat(blinkStrengthID, x),
+                1f,
+                0.1f
+            )
+            .SetLoops(2, LoopType.Yoyo)
+            .OnComplete(() => runtimeMaterial.SetFloat(blinkStrengthID, 0f));
 
+        yield return new WaitForSeconds(0.25f);
+    }
+    
+    
+
+    public void MaxFallSpeed()
+    {
+        if (Rb.velocity.y < maxFallSpeed)
+        {
+            Rb.velocity = new Vector2(Rb.velocity.x, maxFallSpeed);
+        }
+    } 
+    #endregion
+
+    #region Extral Skill
+
+    public void EnableGun() => gun.SetActive(true);
+    public void DisableGun() => gun.SetActive(false);
+
+    public void EnableShieldVisual() => shieldVisual.SetActive(true);
+    public void DisableShieldVisual() => shieldVisual.SetActive(false);
     #endregion
     
 }
