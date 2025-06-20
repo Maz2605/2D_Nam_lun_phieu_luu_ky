@@ -192,7 +192,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2343517828089194809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +210,8 @@ MonoBehaviour:
   firePoint: {fileID: 7670267457336186599}
   detectLine: {fileID: 2171944687468676386}
   blinkMaterial: {fileID: 2100000, guid: 23561e08b5983fb45830560ed10c1b8f, type: 2}
+  faceDirection: -1
+  facingDirection: -1
 --- !u!95 &5699813873371352369
 Animator:
   serializedVersion: 5

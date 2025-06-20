@@ -4,34 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f2c5410-5fe1-4605-8ffd-dfd5a39fd628" name="Changes" comment="">
+    <list default="true" id="1f2c5410-5fe1-4605-8ffd-dfd5a39fd628" name="Changes" comment="Add Map 3 Dersert">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2D_Nam_Lun_Phieu_Luu_Ky/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2D_Nam_Lun_Phieu_Luu_Ky/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Hit (52x54).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Hit (52x54).png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Hit Wall 1 (52x54).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Hit Wall 1 (52x54).png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Hit Wall 2 (52x54).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Hit Wall 2 (52x54).png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Idle 1 (52x54).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Idle 1 (52x54).png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Idle 2 (52x54).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Enemy/Skull/Idle 2 (52x54).png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/GameManager/AudioManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/GameManager/AudioManager.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Traps/TrampolineActive.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Traps/TrampolineActive.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/MapMaterial.physicsMaterial2D" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/MapMaterial.physicsMaterial2D" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Map/background.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Map/background.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TileMap/Tile/Desert.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TileMap/Tile/Desert.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Enemies/Canon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Enemies/Canon.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Enemies/Chicken.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Enemies/Chicken.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Enemies/Rock_2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Enemies/Rock_2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Enemies/Trunk.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Enemies/Trunk.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Enemies/Turtle.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Enemies/Turtle.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/GameManager/StartPoint.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/GameManager/StartPoint.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Player/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scences/Level_3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scences/Level_3.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scences/Level_5.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scences/Level_5.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Camera/CameraControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Camera/CameraControl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Ribo.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Ribo/Rino.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Ribo/Rino.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Ribo/Rino.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Ribo/Rino.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Extentision/LoadingSlider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Extentision/LoadingSlider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Items/DrityWater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Items/DrityWater.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Manager/GameManager/Boostrap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Manager/GameManager/Boostrap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/PlayerState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/PlayerState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Base/BaseEnemies.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Base/BaseEnemies.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Base/BaseStaticEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Base/BaseStaticEnemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Canon/Cannon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Canon/Cannon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Chicken/Chicken.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Chicken/Chicken.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Rino/Rino.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Rino/Rino.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Rock/Rock_3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Rock/Rock_3.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Skull/Skull.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Skull/Skull.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Trunk/Trunk.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Trunk/Trunk.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Turtle/Turtle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Turtle/Turtle.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Input/PlayerInput.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Input/PlayerInput.inputactions" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +41,25 @@
     <option name="autoShow" value="false" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Maz2605"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Maz2605/2D_Nam_lun_phieu_luu_ky.git",
+    "accountId": "44f7fc56-1e86-4872-b30e-22c28b7f82d9"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6ff3bcb667574bf9a8630184172fcfbf176600/37/905db014/Component.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6ff3bcb667574bf9a8630184172fcfbf176600/38/a467c9cc/SceneManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -85,6 +101,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.11.0/Editor/UnityPurchasingEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../ThamKhaoProject/Unity-Platformer-Episode-15/Assets/Scripts/UI/UIManager.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -93,20 +110,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ad55f76a&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$USER_HOME$/Downloads/Test\2D_Nam_Lun_Phieu_Luu_Ky.exe" />
@@ -212,6 +229,7 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
     <option name="hasUnityReference" value="true" />
@@ -221,6 +239,8 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Add Map 3 Dersert" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Map 3 Dersert" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

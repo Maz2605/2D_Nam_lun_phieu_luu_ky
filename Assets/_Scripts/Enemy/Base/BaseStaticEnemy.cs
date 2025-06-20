@@ -31,7 +31,7 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
 
     private float _fireTimer = 0f;
     public int CurrentHealth { get; set; }
-    public int FaceDirection { get; set; }
+    public int faceDirection = -1;
 
     private void Awake()
     {
@@ -45,7 +45,6 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
 
     protected virtual void Start()
     {
-        FaceDirection = staticEnemiesData.facingDirection;
         CurrentHealth = staticEnemiesData.health;
         StartPos = transform.position;
     }
@@ -83,7 +82,7 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
     {
         Vector2 origin = detectLine.position;
         Vector2 direction = Vector2.right;
-        RaycastHit2D hit = Physics2D.Raycast(origin, direction * FaceDirection, staticEnemiesData.detectionRange,
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction * faceDirection, staticEnemiesData.detectionRange,
             staticEnemiesData.playerMask);
 
         if (hit.collider != null && hit.collider.gameObject.tag == "Player")
@@ -99,7 +98,7 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
             CurrentState = State.Idle;
         }
 
-        Debug.DrawRay(origin, direction * FaceDirection * staticEnemiesData.detectionRange, Color.red);
+        Debug.DrawRay(origin, direction * faceDirection * staticEnemiesData.detectionRange, Color.red);
     }
 
     void Shoot()
@@ -125,8 +124,8 @@ public class BaseStaticEnemy : MonoBehaviour, IDamageable
             return;
         }
 
-        bulletScript.SetDirectionFromEnemy(FaceDirection);
-        Debug.Log("Bullet spawned and direction set: " + FaceDirection);
+        bulletScript.SetDirectionFromEnemy(faceDirection);
+        Debug.Log("Bullet spawned and direction set: " + faceDirection);
     }
 
     public void TakeDamage(int damage)

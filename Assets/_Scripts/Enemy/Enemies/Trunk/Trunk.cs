@@ -25,6 +25,6 @@ public class Trunk : BaseEnemies
     {
         if(bulletPrefab == null) return;
         GameObject bullet = PoolingManager.Instance.Spawn(bulletPrefab, firePoint.position, Quaternion.identity);
-        bullet.GetComponent<BaseBullet>().SetDirectionFromEnemy(FaceDirection);
+        bullet.GetComponent<BaseBullet>().SetDirectionFromEnemy(faceDirection);
     }
 }

@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkMaterial: {fileID: 2100000, guid: 23561e08b5983fb45830560ed10c1b8f, type: 2}
+  faceDirection: -1
   baseEnemiesData: {fileID: 11400000, guid: f66f3ca4f26d96242a051dce2574096e, type: 2}
   firePoint: {fileID: 980401693622718162}
   bulletPrefab: {fileID: 2727096644166007848, guid: 68c1f0a26df27724f9b253bc947048de, type: 3}

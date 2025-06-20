@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,9 +56,10 @@ public class Turtle : MonoBehaviour
             anim.SetInteger("State", (int)newState);
         
     }
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (IsDangerous() && other.CompareTag("Player"))
+        if (IsDangerous() && other.gameObject.CompareTag("Player"))
         {
             Rigidbody2D playerRB = other.gameObject.GetComponent<Rigidbody2D>();
             var dg = other.gameObject.GetComponent<IDamageable>();

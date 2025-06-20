@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkMaterial: {fileID: 2100000, guid: 23561e08b5983fb45830560ed10c1b8f, type: 2}
+  faceDirection: 1
   baseEnemiesData: {fileID: 11400000, guid: 84b92b0aa5064f94c85d6aa044b6d72f, type: 2}
 --- !u!95 &8470256919367639817
 Animator:

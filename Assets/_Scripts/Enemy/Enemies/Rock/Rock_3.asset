@@ -24,7 +24,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   moveSpeed: 3
-  patrolRange: 5
+  patrolRange: 10
   groundMask:
     serializedVersion: 2
     m_Bits: 8

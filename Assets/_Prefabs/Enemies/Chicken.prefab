@@ -194,5 +194,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkMaterial: {fileID: 2100000, guid: 23561e08b5983fb45830560ed10c1b8f, type: 2}
+  faceDirection: -1
   baseEnemiesData: {fileID: 11400000, guid: 631f18687b368e64aa47465429edc4eb, type: 2}
-  chasingCooldownDuration: 4

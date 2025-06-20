@@ -11,7 +11,7 @@ public class Rino : BaseEnemies
 
     public override void Attack()
     {
-        Rb.velocity = FaceDirection == 1 ? Vector2.right * MoveSpeed : Vector2.left * MoveSpeed;
+        Rb.velocity = faceDirection == 1 ? Vector2.right * MoveSpeed : Vector2.left * MoveSpeed;
         if (IsWallAhead())
         {
             Target = null;

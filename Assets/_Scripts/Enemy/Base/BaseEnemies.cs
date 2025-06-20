@@ -12,7 +12,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     private Material _runtimeMaterial;
     private int _blinkStrengthID;
 
-    public int FaceDirection { get; set; }
+    public int faceDirection = -1;
     public int CurrentHealth { get; set; }
 
     protected Vector2 StartPos;
@@ -41,7 +41,6 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     private void Start()
     {
         StartPos = transform.position;
-        FaceDirection = baseEnemiesData.facingDirection;
         MoveSpeed = baseEnemiesData.moveSpeed;
     }
 
@@ -79,14 +78,14 @@ public class BaseEnemies : MonoBehaviour, IDamageable
 
     protected void Flip()
     {
-        FaceDirection *= -1;
+        faceDirection *= -1;
         Rb.transform.Rotate(0f, 180f, 0f);
     }
 
     protected void CheckIfShouldFlip()
     {
-        if (FaceDirection == -1 && transform.position.x <= StartPos.x - baseEnemiesData.patrolRange ||
-            FaceDirection == 1 && transform.position.x >= StartPos.x + baseEnemiesData.patrolRange)
+        if (faceDirection == -1 && transform.position.x <= StartPos.x - baseEnemiesData.patrolRange ||
+            faceDirection == 1 && transform.position.x >= StartPos.x + baseEnemiesData.patrolRange)
             Flip();
 
         if (IsWallAhead())
@@ -97,14 +96,14 @@ public class BaseEnemies : MonoBehaviour, IDamageable
 
     protected bool IsWallAhead()
     {
-        Vector2 wallCheckOrigin = transform.position + Vector3.right * FaceDirection * 0.5f;
-        RaycastHit2D wallHit = Physics2D.Raycast(wallCheckOrigin, Vector2.right * FaceDirection, 0.5f, baseEnemiesData.groundMask);
+        Vector2 wallCheckOrigin = transform.position + Vector3.right * faceDirection * 0.5f;
+        RaycastHit2D wallHit = Physics2D.Raycast(wallCheckOrigin, Vector2.right * faceDirection, 0.3f, baseEnemiesData.groundMask);
         return wallHit.collider != null;
     }
 
     public virtual void Patrol()
     {
-        Rb.velocity = new Vector2(FaceDirection * baseEnemiesData.moveSpeed, Rb.velocity.y);
+        Rb.velocity = new Vector2(faceDirection * baseEnemiesData.moveSpeed, Rb.velocity.y);
         CheckIfShouldFlip();
     }
 
@@ -143,7 +142,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         float dir = Mathf.Sign(deltaX);
         Rb.velocity = new Vector2(dir * MoveSpeed, Rb.velocity.y);
 
-        if ((dir > 0 && FaceDirection == -1) || (dir < 0 && FaceDirection == 1))
+        if ((dir > 0 && faceDirection == -1) || (dir < 0 && faceDirection == 1))
         {
             Flip();
         }
@@ -161,7 +160,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
     {
         AttackTimer -= Time.deltaTime;
         Vector2 origin = transform.position;
-        Vector2 direction = FaceDirection == 1 ? Vector2.right : Vector2.left;
+        Vector2 direction = faceDirection == 1 ? Vector2.right : Vector2.left;
         RaycastHit2D hit = Physics2D.Raycast(origin, direction, baseEnemiesData.detectRange, baseEnemiesData.playerMask);
 
         if (hit.collider != null && hit.collider.CompareTag("Player"))
@@ -243,7 +242,7 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         
         if (Target != null)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, FaceDirection == 1 ? Vector2.right : Vector2.left, baseEnemiesData.detectRange, baseEnemiesData.playerMask);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, faceDirection == 1 ? Vector2.right : Vector2.left, baseEnemiesData.detectRange, baseEnemiesData.playerMask);
             if (hit.collider == null || !hit.collider.CompareTag("Player"))
             {
                 Target = null;
