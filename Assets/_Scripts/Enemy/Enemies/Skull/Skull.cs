@@ -5,8 +5,5 @@ using UnityEngine;
 
 public class Skull : MonoBehaviour
 {
-    private void FixedUpdate()
-    {
-        
-    }
+    
 }
