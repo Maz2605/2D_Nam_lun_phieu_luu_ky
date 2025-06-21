@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Rino : BaseEnemies
 {
-    public override void Patrol()
+    protected override void Patrol()
     {
         Rb.velocity = Vector2.zero;
     }
 
-    public override void Attack()
+    protected override void Attack()
     {
         Rb.velocity = faceDirection == 1 ? Vector2.right * MoveSpeed : Vector2.left * MoveSpeed;
         if (IsWallAhead())

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Chicken : BaseEnemies
 {
-    public override void Attack()
+    protected override void Attack()
     {
         MoveSpeed = baseEnemiesData.moveSpeed * 2f;
         base.Attack();

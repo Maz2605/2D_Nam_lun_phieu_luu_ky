@@ -4,9 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f2c5410-5fe1-4605-8ffd-dfd5a39fd628" name="Changes" comment="Change Folder of Dersert Tile">
+    <list default="true" id="1f2c5410-5fe1-4605-8ffd-dfd5a39fd628" name="Changes" comment="check -1">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2D_Nam_Lun_Phieu_Luu_Ky/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2D_Nam_Lun_Phieu_Luu_Ky/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Skull/Skull.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Skull/Skull.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scences/Level_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scences/Level_1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scences/Level_3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scences/Level_3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scences/Level_4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scences/Level_4.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scences/Level_5.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scences/Level_5.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Base/BaseEnemies.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Base/BaseEnemies.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/AngryPig/AngryPig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/AngryPig/AngryPig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Chicken/Chicken.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Chicken/Chicken.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Mud/Mud_2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Mud/Mud_2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Rino/Rino.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Rino/Rino.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Trunk/Trunk.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Trunk/Trunk.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Worm/Worm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemies/Worm/Worm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,18 +36,21 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Maz2605"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Maz2605&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Maz2605/2D_Nam_lun_phieu_luu_ky.git",
-    "accountId": "44f7fc56-1e86-4872-b30e-22c28b7f82d9"
+}</component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="44f7fc56-1e86-4872-b30e-22c28b7f82d9" />
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Maz2605/2D_Nam_lun_phieu_luu_ky.git&quot;,
+    &quot;accountId&quot;: &quot;44f7fc56-1e86-4872-b30e-22c28b7f82d9&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6ff3bcb667574bf9a8630184172fcfbf176600/37/905db014/Component.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6ff3bcb667574bf9a8630184172fcfbf176600/38/a467c9cc/SceneManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -65,6 +80,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Manager/GameManager/SaveData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Player/FiniteStateMachine/PlayerStateMachine.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Player/Gun.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://F:/Unity/My Project/2D_Nam_Lun_Phieu_Luu_Ky/Assets/_Scripts/Player/PlayerBullet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Player/PlayerBullet.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Trap/Arrow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Trap/Base_Trap.cs" root0="FORCE_HIGHLIGHTING" />
@@ -86,20 +102,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "configurable.group.appearance",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$USER_HOME$/Downloads/Test\2D_Nam_Lun_Phieu_Luu_Ky.exe" />
@@ -135,10 +151,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="25224">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="25224" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -199,6 +215,7 @@
       <workItem from="1750238970886" duration="29599000" />
       <workItem from="1750315151538" duration="15232000" />
       <workItem from="1750384501441" duration="417000" />
+      <workItem from="1750507294651" duration="2933000" />
     </task>
     <task id="LOCAL-00001" summary="Add Map 3 Dersert">
       <option name="closed" value="true" />
@@ -216,7 +233,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750423017314</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="check -1">
+      <option name="closed" value="true" />
+      <created>1750424849465</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1750424849465</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,11 +255,23 @@
     <option name="unityProjectFolder" value="true" />
   </component>
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Add Map 3 Dersert" />
     <MESSAGE value="Change Folder of Dersert Tile" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change Folder of Dersert Tile" />
+    <MESSAGE value="check -1" />
+    <option name="LAST_COMMIT_MESSAGE" value="check -1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -244,10 +281,10 @@
           <line>7</line>
           <properties documentPath="F:\Unity\My Project\2D_Nam_Lun_Phieu_Luu_Ky\Assets\_Scripts\Enemy\Enemies\Worm\Worm.cs" containingFunctionPresentation="Method 'Attack'">
             <startOffsets>
-              <option value="152" />
+              <option value="155" />
             </startOffsets>
             <endOffsets>
-              <option value="153" />
+              <option value="156" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />

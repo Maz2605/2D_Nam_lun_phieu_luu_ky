@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/_Scences/Level_4.unity
     guid: 55dfdc7099ff85c4a9fb5f24140d48fb
   - enabled: 0
-    path: Assets/_Scences/Level_5.unity
+    path: Assets/_Scences/Dev.unity
     guid: 18915aebf9d085749b351e50093d9a9c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6e4c655342364354cb70b1c1c6087d9a, type: 2}

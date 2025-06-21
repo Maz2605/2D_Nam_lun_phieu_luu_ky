@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class AngryPig : BaseEnemies
 {
-    public override void Attack()
+    protected override void Attack()
     {
         MoveSpeed = baseEnemiesData.moveSpeed * 2.5f;
         base.Attack();
+    }
+
+    protected override void Patrol()
+    {
+        MoveSpeed = baseEnemiesData.moveSpeed;
+        base.Patrol();
     }
 
     protected override void AttackEffect(Collision2D other)
@@ -23,7 +29,6 @@ public class AngryPig : BaseEnemies
             Vector2 knockback = new Vector2(direction.x, 0.2f).normalized * baseEnemiesData.knockbackForce;
             playerRB.AddForce(knockback, ForceMode2D.Impulse);
         }
-        AttackTimer = baseEnemiesData.attackCooldown;
         CurrentState = State.Patrol;
         Flip();
     }

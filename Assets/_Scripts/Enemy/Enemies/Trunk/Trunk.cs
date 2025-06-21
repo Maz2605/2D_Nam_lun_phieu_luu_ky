@@ -10,7 +10,7 @@ public class Trunk : BaseEnemies
     private float _fireTimer = 0f;
     public float cooldown = 0.5f;
 
-    public override void Attack()
+    protected override void Attack()
     {
         base.Attack();
         _fireTimer -= Time.deltaTime;
