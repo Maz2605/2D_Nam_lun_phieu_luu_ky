@@ -6,7 +6,7 @@ using UnityEngine;
 public class Turtle : MonoBehaviour
 {
     public int damage = 50;
-    public float knockbackForce = 50f;
+    public float knockbackForce = 5f;
     public float safeDuration = 5f;
     public float growDuration = 1f;
     public float dangerousDuration = 5f;

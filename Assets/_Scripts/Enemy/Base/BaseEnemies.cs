@@ -38,13 +38,13 @@ public class BaseEnemies : MonoBehaviour, IDamageable
         CurrentHealth = baseEnemiesData.health;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         StartPos = transform.position;
         MoveSpeed = baseEnemiesData.moveSpeed;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         DetectPlayer();
     }
