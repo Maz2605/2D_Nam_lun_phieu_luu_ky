@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 514b88c61fbaab4418e1c5f8f7854473, type: 3}
-  m_Name: Skull
+  m_Name: Bee
   m_EditorClassIdentifier: 
   facingDirection: 1
-  health: 1000
+  health: 100
   destroyAfter: 1
-  detectRange: 15
+  detectRange: 50
   chaseDistance: 5
-  knockbackForce: 10
-  attackCooldown: 0.25
-  damage: 100
+  knockbackForce: 20
+  attackCooldown: 1
+  damage: 50
   playerMask:
     serializedVersion: 2
     m_Bits: 64
-  moveSpeed: 3
+  moveSpeed: 2
   patrolRange: 10
   groundMask:
     serializedVersion: 2
