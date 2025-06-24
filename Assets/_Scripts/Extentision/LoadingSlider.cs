@@ -35,7 +35,7 @@ public class LoadingSlider : MonoBehaviour
             });
         yield return new WaitForSeconds(loadingDuration);
         yield return new WaitForSeconds(extraDelay);
-        SceneManager.LoadScene(nextSceneName);
+        SceneLoader.Instance.LoadScene(nextSceneName);
         }
     }
 

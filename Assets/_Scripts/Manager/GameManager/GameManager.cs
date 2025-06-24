@@ -149,6 +149,7 @@ public class GameManager : Singleton<GameManager>
         _currentLevelIndex = Mathf.Clamp(_currentLevelIndex + 1, 1, 4);
         UnLockLevel(_currentLevelIndex);
         SceneLoader.Instance.LoadScene("Level_"+ _currentLevelIndex);
+        
     }
 
     public void AddLives()
@@ -202,7 +203,7 @@ public class GameManager : Singleton<GameManager>
 
         string json = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(_savePath, json);
-        Debug.Log("Saved Data");
+        Debug.Log("Saved Data at " + _savePath);
     }
 
     public void LoadData()

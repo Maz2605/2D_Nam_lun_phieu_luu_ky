@@ -46,7 +46,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         string json = JsonUtility.ToJson(_audioDataManager, true);
         File.WriteAllText(_filePath, json);
-        Debug.Log("Save Data at " + _filePath);
+        Debug.Log("Save Data at " + _filePath );
     }
 
     public void LoadData()
@@ -147,10 +147,25 @@ public class AudioManager : Singleton<AudioManager>
 
     #region Music
 
-    public void PlayMusicBg1() => PlayMusic(musicBg01, true);
-    public void PlayMusicBg2() => PlayMusic(musicBg02, true);
-    public void PlayMusicBg3() => PlayMusic(musicBg03, true);
-    public void PlayMusicBg4() => PlayMusic(musicBg04, true);
+    public void PlayMusicBg(string level = "Level_1")
+    {
+        switch (level)
+        {
+            case "Level_1":
+                PlayMusic(musicBg01, true);
+                break;
+            case "Level_2":
+                PlayMusic(musicBg02, true);
+                break;
+            case "Level_3":
+                PlayMusic(musicBg03, true);
+                break;
+            case "Level_4":
+                PlayMusic(musicBg04, true);
+                break;
+        }
+    } 
+    
     public void PlayMusicWin() => PlayMusic(musicWin);
     public void PlayMusicLose() => PlayMusic(musicLose);
     

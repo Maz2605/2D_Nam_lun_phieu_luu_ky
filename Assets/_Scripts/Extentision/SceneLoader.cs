@@ -21,7 +21,7 @@ public class SceneLoader : Singleton<SceneLoader>
                 GameManager.Instance?.SetCurrentLevelIndex(parsedIndex);
             }
         }
-        
+        AudioManager.Instance?.PlayMusicBg(sceneName);
         DOVirtual.DelayedCall(0.5f, () =>
         {
             SceneManager.LoadScene(sceneName);

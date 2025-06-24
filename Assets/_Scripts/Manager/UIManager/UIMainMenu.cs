@@ -21,7 +21,7 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private Button level2Button;
     [SerializeField] private Button level3Button;
     [SerializeField] private Button level4Button;
-    [SerializeField] private Button level5Button;
+    // [SerializeField] private Button level5Button;
 
 
     protected  void Awake()
@@ -36,17 +36,17 @@ public class UIMainMenu : MonoBehaviour
 
     private void Start()
     {
-        level1Button?.onClick.AddListener(() => { OnLevelsButtonPressed(SceneName.Level1); AudioManager.Instance.PlayMusicBg1();});
+        level1Button?.onClick.AddListener(() => { OnLevelsButtonPressed(SceneName.Level1);});
         level2Button?.onClick.AddListener(() => { OnLevelsButtonPressed(SceneName.Level2); });
         level3Button?.onClick.AddListener(() => { OnLevelsButtonPressed(SceneName.Level3); });
         level4Button?.onClick.AddListener(() => { OnLevelsButtonPressed(SceneName.Level4); });
-        level5Button?.onClick.AddListener(() => { OnLevelsButtonPressed(SceneName.Level5); });
+        // level5Button?.onClick.AddListener(() => { OnLevelsButtonPressed(SceneName.Level5); });
 
         SetLevelInteractable(level1Button, 1);
         SetLevelInteractable(level2Button, 2);
         SetLevelInteractable(level3Button, 3);
         SetLevelInteractable(level4Button, 4);
-        SetLevelInteractable(level5Button, 5);
+        // SetLevelInteractable(level5Button, 5);
     }
 
     private void OnEnable()
@@ -70,7 +70,7 @@ public class UIMainMenu : MonoBehaviour
             SceneName.Level2 => 2,
             SceneName.Level3 => 3,
             SceneName.Level4 => 4,
-            SceneName.Level5 => 5,
+            // SceneName.Level5 => 5,
             _ => 1
         };
         AudioManager.Instance.PlaySfxButtonClick();

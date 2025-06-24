@@ -127,6 +127,7 @@ public class UIGamePlay : MonoBehaviour
     
     public void OnGameOver()
     {
+        AudioManager.Instance.PlayMusicLose();
         ShowUIGamePlayPanel(false);
         ShowUIGameOverPanel(true);
     }
