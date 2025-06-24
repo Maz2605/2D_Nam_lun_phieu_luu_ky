@@ -15,7 +15,7 @@ MonoBehaviour:
   facingDirection: 1
   health: 100
   destroyAfter: 1
-  detectRange: 50
+  detectRange: 10
   chaseDistance: 5
   knockbackForce: 20
   attackCooldown: 1

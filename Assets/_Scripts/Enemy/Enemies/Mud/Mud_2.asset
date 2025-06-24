@@ -15,16 +15,16 @@ MonoBehaviour:
   facingDirection: 1
   health: 100
   destroyAfter: 1
-  detectRange: 2.5
+  detectRange: 4
   chaseDistance: 5
   knockbackForce: 20
   attackCooldown: 1
-  damage: 25
+  damage: 50
   playerMask:
     serializedVersion: 2
     m_Bits: 64
-  moveSpeed: 3
-  patrolRange: 5
+  moveSpeed: 4
+  patrolRange: 10
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
