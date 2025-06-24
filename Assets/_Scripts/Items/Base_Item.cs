@@ -13,7 +13,7 @@ public abstract class Base_Item : MonoBehaviour
     private Vector3 initialPos;
     private Vector3 initialScale;
 
-    private void Start()
+    protected virtual void Start()
     {
         AnimateScaling();
     }

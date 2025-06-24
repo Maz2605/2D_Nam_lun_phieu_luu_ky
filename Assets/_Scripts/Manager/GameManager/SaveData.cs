@@ -14,6 +14,9 @@ public class SaveData
     public List<CheckpointData> checkpoints = new();
     
     [NonSerialized] public Dictionary<string, Vector2> checkpointDict = new();
+    
+    public List<SunCountData> sunCountList = new();
+    [NonSerialized] public Dictionary<string, int> sunCountPerLevel = new();
 }
 
 [Serializable]
@@ -42,4 +45,17 @@ public struct Vector2Serializable
 
     public static implicit operator Vector2(Vector2Serializable v) => new(v.x, v.y);
     public static implicit operator Vector2Serializable(Vector2 v) => new(v.x, v.y);
+}
+
+[Serializable]
+public struct SunCountData
+{
+    public string sceneName;
+    public int count;
+
+    public SunCountData(string sceneName, int count)
+    {
+        this.sceneName = sceneName;
+        this.count = count;
+    }
 }

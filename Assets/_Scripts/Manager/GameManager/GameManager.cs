@@ -56,6 +56,11 @@ public class GameManager : Singleton<GameManager>
     {
         string sceneName = scene.name;
 
+        if (saveData.sunCountPerLevel.ContainsKey(sceneName))
+        {
+            saveData.sunCountPerLevel[sceneName] = 0;
+        }
+        
         if (saveData.checkpointDict.TryGetValue(sceneName, out Vector2 savedPos))
         {
             _currentRespawnPosition = savedPos;
@@ -64,6 +69,7 @@ public class GameManager : Singleton<GameManager>
         {
             _currentRespawnPosition = Vector2.zero;
         }
+        SaveData();
     }
     public void RegisterPlayer(Player player)
     {
@@ -140,7 +146,7 @@ public class GameManager : Singleton<GameManager>
 
     public void OnLevelComplete()
     {
-        _currentLevelIndex = Mathf.Clamp(_currentLevelIndex + 1, 1, 5);
+        _currentLevelIndex = Mathf.Clamp(_currentLevelIndex + 1, 1, 4);
         UnLockLevel(_currentLevelIndex);
         SceneLoader.Instance.LoadScene("Level_"+ _currentLevelIndex);
     }
@@ -180,6 +186,12 @@ public class GameManager : Singleton<GameManager>
     public void SaveData()
     {
         saveData.Lives = PlayerLives;
+        
+        saveData.sunCountList = new();
+        foreach (var kvp in saveData.sunCountPerLevel)
+        {
+            saveData.sunCountList.Add(new SunCountData(kvp.Key, kvp.Value));
+        }
 
         // Convert dictionary to list
         saveData.checkpoints = new List<CheckpointData>();
@@ -199,6 +211,12 @@ public class GameManager : Singleton<GameManager>
         {
             string json = File.ReadAllText(_savePath);
             saveData = JsonUtility.FromJson<SaveData>(json);
+            
+            saveData.sunCountPerLevel = new();
+            foreach (var sunData in saveData.sunCountList)
+            {
+                saveData.sunCountPerLevel[sunData.sceneName] = sunData.count;
+            }
 
             // Convert list to dictionary
             saveData.checkpointDict = new Dictionary<string, Vector2>();

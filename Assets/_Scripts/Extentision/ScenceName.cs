@@ -38,4 +38,18 @@ public static class SceneNameExtension
                 return "UnknownScene";
         }
     }
+    public static SceneName ToSceneName(string name)
+    {
+        return name switch
+        {
+            "Loading" => SceneName.Loading,
+            "MainMenu" => SceneName.MainMenu,
+            "Level_1" => SceneName.Level1,
+            "Level_2" => SceneName.Level2,
+            "Level_3" => SceneName.Level3,
+            "Level_4" => SceneName.Level4,
+            "Level_5" => SceneName.Level5,
+            _ => SceneName.MainMenu,
+        };
+    }
 }

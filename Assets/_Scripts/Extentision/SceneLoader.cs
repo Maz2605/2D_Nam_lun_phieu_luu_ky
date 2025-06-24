@@ -21,8 +21,7 @@ public class SceneLoader : Singleton<SceneLoader>
                 GameManager.Instance?.SetCurrentLevelIndex(parsedIndex);
             }
         }
-
-        // Optional: Add fade transition here
+        
         DOVirtual.DelayedCall(0.5f, () =>
         {
             SceneManager.LoadScene(sceneName);
