@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 174202508201773323}
   - component: {fileID: 3625753437612288664}
   - component: {fileID: 5266262326479330455}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SprikeBall
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

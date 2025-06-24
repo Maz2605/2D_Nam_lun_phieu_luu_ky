@@ -74,15 +74,15 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1385647129
-  m_SortingLayer: 6
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8d17c256f70da29429c0acefa82877e4, type: 3}
+  m_SortingLayerID: -1066002677
+  m_SortingLayer: 1
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -675346974, guid: 8d17c256f70da29429c0acefa82877e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4, y: 2}
+  m_Size: {x: 1, y: 0.53125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -135,7 +135,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 2268593084621563960}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bb7f83caefdf4fa4b806b04881569a9e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -158,9 +158,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.386914, y: 0.0423187}
+  m_Offset: {x: 0.002019764, y: 0.009228497}
   serializedVersion: 2
-  m_Radius: 0.29267275
+  m_Radius: 0.27525705
 --- !u!50 &4515727661745044748
 Rigidbody2D:
   serializedVersion: 4

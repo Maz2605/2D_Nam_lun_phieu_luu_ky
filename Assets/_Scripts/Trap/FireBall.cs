@@ -14,12 +14,15 @@ public class Fireball : MonoBehaviour
     private Rigidbody2D rb;
     private float startY;
     private int _damage = 100; 
+    private float _jumpDuration; // Duration of the jump animation
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         startY = transform.position.y;
-
+        
+        float gravity = Mathf.Abs(rb.gravityScale * Physics2D.gravity.y);
+        _jumpDuration = jumpForce / gravity;
         StartCoroutine(JumpLoop());
     }
 
@@ -27,25 +30,40 @@ public class Fireball : MonoBehaviour
     {
         while (true)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            // Nhảy lên
+            rb.velocity = new Vector2(0f, jumpForce);
 
-            yield return new WaitUntil(() => transform.position.y >= startY + maxHeight);
+            // Đợi tới khi lên đỉnh (vận tốc y gần bằng 0 và đang đi xuống)
+            yield return new WaitUntil(() => rb.velocity.y <= 0.01f);
+
+            // Tạm dừng lực để quay
+            rb.velocity = Vector2.zero;
+            rb.isKinematic = true;
+
             yield return transform.DORotate(
                 new Vector3(0, 0, transform.eulerAngles.z + rotationAmount),
                 rotationDuration,
                 RotateMode.FastBeyond360
             ).WaitForCompletion();
 
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
-            
-            yield return new WaitUntil(() => transform.position.y <= startY + 0.1f && rb.velocity.y <= 0);
-            
+            rb.isKinematic = false;
+
+            // Đợi rơi xuống gần vị trí ban đầu
+            yield return new WaitUntil(() =>
+                rb.velocity.y <= 0 && transform.position.y <= startY + 0.05f
+            );
+
+            rb.velocity = Vector2.zero;
+            rb.isKinematic = true;
+
             yield return transform.DORotate(
                 new Vector3(0, 0, transform.eulerAngles.z + rotationAmount),
                 rotationDuration,
                 RotateMode.FastBeyond360
             ).WaitForCompletion();
-            rb.velocity = new Vector2(rb.velocity.x, transform.position.y);
+
+            rb.isKinematic = false;
+
             yield return new WaitForSeconds(delayBetweenJumps);
         }
     }
