@@ -13,7 +13,6 @@ public static class ObserverManager<T> where T : Enum
         {
             return;
         }
-        
         if (!_boardObserver.TryAdd(eventID, callback))
         {
             _boardObserver[eventID] += callback;

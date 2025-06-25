@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     public bool IsInputEnabled { get; private set; } = true;
-
     public void EnableInput() => IsInputEnabled = true;
     public void DisableInput() => IsInputEnabled = false;
     public Vector2 RawInputMovement {get; private set;}
@@ -28,7 +27,6 @@ public class InputManager : MonoBehaviour
     {
         CheckJumpInputHoldTime();
     }
-
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (!IsInputEnabled) return;
@@ -37,7 +35,6 @@ public class InputManager : MonoBehaviour
         NormInputX = Mathf.RoundToInt(RawInputMovement.x);
         NormInputY = Mathf.RoundToInt(RawInputMovement.y);
     }
-
     public void OnJumpInput(InputAction.CallbackContext context)
     {
         if (!IsInputEnabled) return;
@@ -53,11 +50,9 @@ public class InputManager : MonoBehaviour
             JumpInputStop = true;
         }
     }
-
     public void OnClickInput(InputAction.CallbackContext context)
     {
         if (!IsInputEnabled) return;
-
         if (context.started)
         {
             ClickInput = true;

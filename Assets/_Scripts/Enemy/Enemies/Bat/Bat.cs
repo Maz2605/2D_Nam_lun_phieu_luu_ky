@@ -8,16 +8,13 @@ public class Bat : BaseEnemies
     public float detectRadius = 3f;
     public float attackSpeed = 7f;
     public float returnSpeed = 5f;
-
     private Vector2 _attackTargetPos;
     private bool _isReturning = false;
-
     protected override void Update()
     {
         if (CurrentState == State.Patrol)
             DetectPlayerByCircle();
     }
-
     protected override void Attack()
     {
         if (_isReturning)
@@ -33,7 +30,6 @@ public class Bat : BaseEnemies
             }
             return;
         }
-        
         Vector2 dirToTarget = (_attackTargetPos - (Vector2)transform.position).normalized;
         if ((dirToTarget.x > 0 && faceDirection == -1) || (dirToTarget.x < 0 && faceDirection == 1))
         {

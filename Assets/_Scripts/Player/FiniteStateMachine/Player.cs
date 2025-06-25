@@ -6,7 +6,6 @@ using UnityEngine;
 public class Player : MonoBehaviour, IDamageable
 {
     #region States
-
     public PlayerStateMachine StateMachine { get; private set; }
     public P_GroundedState GroundedState { get; private set; }
     public P_MoveState MoveState { get; private set; }

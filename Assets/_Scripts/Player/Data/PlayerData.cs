@@ -21,6 +21,4 @@ public class PlayerData : ScriptableObject
     public float coyoteTime = 0.2f;
     public float jumpHeightMultiplier = 0.2f;
     
-    
-    
 }

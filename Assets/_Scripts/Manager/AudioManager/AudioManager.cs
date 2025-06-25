@@ -63,7 +63,6 @@ public class AudioManager : Singleton<AudioManager>
             SaveData();
         }
     }
-
     public void ResetData()
     {
         _audioDataManager = new AudioDataManager();

@@ -38,6 +38,7 @@ public class Gun : MonoBehaviour
     }
     void Shoot()
     {
+        AudioManager.Instance.PlaySfxFire();
         if(bulletPrefab == null) return;
         this.direction = _player.playerData.facingDirection;
         GameObject bullet = PoolingManager.Instance.Spawn(bulletPrefab, firePoint.position, Quaternion.identity);

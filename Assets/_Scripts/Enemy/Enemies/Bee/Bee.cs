@@ -26,8 +26,6 @@ public class Bee : BaseEnemies
             Shoot();
         }
     }
-
-    
     protected override void DetectPlayer()
     {
         Vector2 origin = transform.position;
@@ -45,8 +43,6 @@ public class Bee : BaseEnemies
 
         Debug.DrawRay(origin, direction * baseEnemiesData.detectRange, Color.red);
     }
-    
-
     void Shoot()
     {
         if(bulletPrefab == null) return;

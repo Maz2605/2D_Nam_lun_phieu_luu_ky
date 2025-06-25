@@ -312,7 +312,7 @@ MonoBehaviour:
   musicLose: {fileID: 8300000, guid: 9d77922812607434abd17c0a3bff6e97, type: 3}
   sfxJump: {fileID: 8300000, guid: 50c2ea8bff49a334d8272db8a51dc153, type: 3}
   sfxHurt: {fileID: 8300000, guid: 4466764396aa99e499f536a2abd70378, type: 3}
-  sfxFire: {fileID: 8300000, guid: 4466764396aa99e499f536a2abd70378, type: 3}
+  sfxFire: {fileID: 8300000, guid: 79decafa5166f2446ba17bd44fc73ad9, type: 3}
   sfxGetItem: {fileID: 8300000, guid: 1b0f3190a2c39184ea71fecefd193c50, type: 3}
   sfxCheckPoint: {fileID: 8300000, guid: 53d0d7efed211e64a8b15d1d98479e61, type: 3}
   sfxButtonClick: {fileID: 8300000, guid: a76d65ae883558440b43dd49a3a288d1, type: 3}

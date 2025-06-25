@@ -7,8 +7,8 @@ public class MoveTrap : MonoBehaviour
     public enum MoveDirection { Up, Down, Left, Right }
 
     [Header("Movement Settings")]
-    [SerializeField] private float moveDistance = 3f;              // Khoảng cách di chuyển từ StartPos
-    [SerializeField] private float moveSpeed = 2f;                 // Tốc độ di chuyển
+    [SerializeField] private float moveDistance = 3f;             
+    [SerializeField] private float moveSpeed = 2f;                 
     [SerializeField] private MoveDirection moveDirection = MoveDirection.Up;
 
     private Vector3 _startPos;

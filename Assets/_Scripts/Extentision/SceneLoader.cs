@@ -22,10 +22,12 @@ public class SceneLoader : Singleton<SceneLoader>
             }
         }
         AudioManager.Instance?.PlayMusicBg(sceneName);
-        DOVirtual.DelayedCall(0.5f, () =>
-        {
-            SceneManager.LoadScene(sceneName);
-        });
+        AnimationTransition.Instance?.OnPlay(sceneName);
+        
+    //     DOVirtual.DelayedCall(0.5f, () =>
+    //     {
+    //         SceneManager.LoadScene(sceneName);
+    //     });
     }
 
     public void UnLoadSceneAdditive(string sceneName, Action onSceneUnload = null, Action onSceneUnloaded = null)

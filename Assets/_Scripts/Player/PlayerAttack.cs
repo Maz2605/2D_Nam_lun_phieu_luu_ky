@@ -15,6 +15,7 @@ public class PlayerAttack : MonoBehaviour
             var enemy = other.GetComponent<IDamageable>();
             if (enemy != null)
             {
+                AudioManager.Instance.PlaySfxHurt();
                 enemy.TakeDamage(50);
                 Rigidbody2D rb = transform.root.GetComponent<Rigidbody2D>();
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);

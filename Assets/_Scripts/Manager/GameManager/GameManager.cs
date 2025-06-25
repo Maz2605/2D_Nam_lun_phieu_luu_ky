@@ -18,7 +18,6 @@ public class GameManager : Singleton<GameManager>
     public SaveData saveData;
     
     public int PlayerLives { get; private set; }
-
     public event Action<int> OnPlayerLivesChanged;
     public static event Action GameOverEvent;
 
@@ -205,7 +204,6 @@ public class GameManager : Singleton<GameManager>
         File.WriteAllText(_savePath, json);
         Debug.Log("Saved Data at " + _savePath);
     }
-
     public void LoadData()
     {
         if (File.Exists(_savePath))

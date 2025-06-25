@@ -23,15 +23,8 @@ public class CanonBomb : BaseBullet
     {
         animator = GetComponent<Animator>();
         animator.SetTrigger("Bomb");
-        
         yield return new WaitForSeconds(0.5f);
-        
-        
         base.Effect(targetToDamage);
-
-        
         PoolingManager.Instance.Despawn(gameObject);
     }
-    
-    
 }
