@@ -7,6 +7,7 @@ public class Boss : BaseEnemies
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private GameObject sunPrefab;
     private int _bulletsFired;
     public float currentFrequency;
     public float currentAmplitude;
@@ -63,5 +64,12 @@ public class Boss : BaseEnemies
         if (bossBullet != null) bossBullet.amplitude = currentAmplitude;
 
         _bulletsFired++;
+    }
+
+    public override void Dead()
+    {
+        Anim.SetTrigger("Death");
+        base.Dead();
+        PoolingManager.Instance.Spawn(sunPrefab, transform.position, Quaternion.identity);
     }
 }

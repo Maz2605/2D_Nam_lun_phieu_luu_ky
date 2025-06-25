@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Boss
   m_EditorClassIdentifier: 
   facingDirection: 1
-  health: 1000
+  health: 100
   destroyAfter: 1
   detectRange: 15
   chaseDistance: 5
