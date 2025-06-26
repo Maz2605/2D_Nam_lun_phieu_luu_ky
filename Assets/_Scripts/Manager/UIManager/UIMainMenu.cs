@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class UIMainMenu : MonoBehaviour
 {
-    [Header("Panels")] [SerializeField] private GameObject mainMenuPanel;
+    [Header("Panels")] 
+    [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] public GameObject levelSelectorPanel;
+    [SerializeField] private GameObject gamePlayPanel;
+
 
     [Header("Main Menu Buttons")] [SerializeField]
     private Button newGameButton;
@@ -22,7 +25,15 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private Button level3Button;
     [SerializeField] private Button level4Button;
     // [SerializeField] private Button level5Button;
+    
+    [Header("Setting Button")]
+    [SerializeField] private Button settingButton;
+    
+    [Header("Audio Settings")]
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
 
+    private readonly float[] _volumeValues = {0f, 0.25f, 0.5f, 0.75f, 1f};
 
     protected  void Awake()
     {
@@ -32,6 +43,8 @@ public class UIMainMenu : MonoBehaviour
         levelsButton?.onClick.AddListener(OnLevelsPanelPressed);
         quitGameButton?.onClick.AddListener(OnQuitGamePressed);
         backButton?.onClick.AddListener(OnBackPressed);
+        settingButton?.onClick.AddListener(OnSettingPressed);
+
     }
 
     private void Start()
@@ -47,6 +60,17 @@ public class UIMainMenu : MonoBehaviour
         SetLevelInteractable(level3Button, 3);
         SetLevelInteractable(level4Button, 4);
         // SetLevelInteractable(level5Button, 5);
+        
+        musicSlider.wholeNumbers = true;
+        musicSlider.minValue = 0;
+        musicSlider.maxValue = 4;
+        musicSlider.value = GetStepIndex(AudioManager.Instance.MusicVolume);
+        musicSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+        sfxSlider.wholeNumbers = true;
+        sfxSlider.minValue = 0;
+        sfxSlider.maxValue = 4;
+        sfxSlider.value = GetStepIndex(AudioManager.Instance.SfxVolume);
+        sfxSlider.onValueChanged.AddListener(OnSfxVolumeChanged);
     }
 
     private void OnEnable()
@@ -138,4 +162,43 @@ public class UIMainMenu : MonoBehaviour
             levelSelectorPanel.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.InBack);
         }
     }
+    private void OnMusicVolumeChanged(float index)
+    {
+        int stepIndex = Mathf.RoundToInt(index);
+        float volume = _volumeValues[stepIndex];
+        AudioManager.Instance.SetMusicVolume(volume);
+    }
+
+    private void OnSfxVolumeChanged(float index)
+    {
+        int stepIndex = Mathf.RoundToInt(index);
+        float volume = _volumeValues[stepIndex];
+        AudioManager.Instance.SetSfxVolume(volume);
+    }
+
+    private int GetStepIndex(float volume)
+    {
+        float minDiff = Mathf.Abs(_volumeValues[0] - volume);
+        int closestIndex = 0;
+        for (int i = 1; i < _volumeValues.Length; i++)
+        {
+            float diff = Mathf.Abs(_volumeValues[i] - volume);
+            if (diff < minDiff)
+            {
+                minDiff = diff;
+                closestIndex = i;
+            }
+        }
+        return closestIndex;
+    }
+    private void OnSettingPressed()
+    {
+        AudioManager.Instance.PlaySfxButtonClick();
+        ShowUIGamePlayPanel(true);
+    }
+    private void ShowUIGamePlayPanel(bool show)
+    {
+        gamePlayPanel.SetActive(show);
+    }
+
 }

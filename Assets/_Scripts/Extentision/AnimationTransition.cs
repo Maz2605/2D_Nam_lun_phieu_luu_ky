@@ -33,7 +33,7 @@ public class AnimationTransition : Singleton<AnimationTransition>
         transitionImage.transform.DOScale(40f, zoomDuration).SetEase(Ease.InQuad)
             .OnComplete(() =>
             {
-                SceneManager.LoadScene(sceneToLoad);
+                // SceneManager.LoadScene(sceneToLoad);
                 transitionImage.transform.localScale = Vector3.one; 
                 transitionImage.gameObject.SetActive(false); // Tắt hình ảnh sau khi chuyển cảnh
             });
