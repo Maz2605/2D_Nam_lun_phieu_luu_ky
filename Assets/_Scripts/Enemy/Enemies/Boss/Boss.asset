@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Boss
   m_EditorClassIdentifier: 
   facingDirection: 1
-  health: 100
+  health: 1000
   destroyAfter: 1
   detectRange: 15
   chaseDistance: 5
   knockbackForce: 20
-  attackCooldown: 0.25
+  attackCooldown: 0.2
   damage: 50
   playerMask:
     serializedVersion: 2
@@ -27,4 +27,4 @@ MonoBehaviour:
   patrolRange: 8
   groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 8

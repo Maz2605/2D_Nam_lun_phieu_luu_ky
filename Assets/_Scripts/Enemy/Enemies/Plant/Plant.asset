@@ -16,7 +16,7 @@ MonoBehaviour:
   health: 100
   destroyAfterSeconds: 2
   detectionRange: 15
-  attackCooldown: 0.15
+  attackCooldown: 0.25
   playerMask:
     serializedVersion: 2
     m_Bits: 64
